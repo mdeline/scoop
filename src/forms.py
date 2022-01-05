@@ -4,8 +4,7 @@ from wtforms import (
     PasswordField,
     SelectField,
     StringField,
-    SubmitField,
-    TextAreaField,
+    SubmitField
 )
 from wtforms.validators import URL, DataRequired, Email, EqualTo, Length
 
@@ -20,10 +19,7 @@ class RegisterForm(FlaskForm):
     )
     email = StringField(
         'Email',
-        [
-            Email(message=('Email format is invalid.')),
-            DataRequired()
-        ]
+        [Email(message=('Email format is invalid.')), DataRequired()]
     )
     password = PasswordField(
         "Password",
@@ -31,7 +27,7 @@ class RegisterForm(FlaskForm):
     )
     confirmPassword = PasswordField(
         "Repeat Password",
-        [EqualTo(password, message="Passwords must match.")]
+        [EqualTo("password", message="Passwords must match.")]
     )
-    recaptcha = RecaptchaField()
+
     submit = SubmitField("Submit")
