@@ -13,6 +13,7 @@ def create_app():
         from .home import home
         from .login import login
         from .register import register
+        from . import forms
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
