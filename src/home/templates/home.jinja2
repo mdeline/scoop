@@ -1,1 +1,11 @@
-<h2>Home</h2>
+{% extends "layout.jinja2" %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{title}}</h1>
+        <img src="/static/pexels-drinks.jpg"
+            width="200"
+            height="auto">
+        <p>{{description}}</p>
+    </div>
+{% endblock %}
