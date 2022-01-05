@@ -11,8 +11,10 @@ def create_app():
     with app.app_context():
         # Import parts of our application
         from .home import home
+        from .login import login
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
+        app.register_blueprint(login.login_pb)
 
         return app
