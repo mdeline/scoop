@@ -17,7 +17,7 @@ success_pb = Blueprint(
 def register():
     register_form = RegisterForm()
     if register_form.validate_on_submit():
-        return redirect(url_for("register.success")) # todo: fix bug
+        return redirect(url_for("success_pb.success"))
     return render_template(
         "register.jinja2",
         form=register_form,
