@@ -7,7 +7,7 @@
         <form method="POST" action="/register">
 
             {{ form.csrf_token }}
-            
+
             <!-- First Name -->
             <fieldset class="form-field">{{ form.first_name.label }} {{ form.first_name }}
             {% if form.first_name.errors %}
@@ -34,6 +34,7 @@
             {% endif %}
           </fieldset>
 
+          <!-- Email -->
           <fieldset class="form-field">{{ form.email.label }} {{ form.email }}
             {% if form.email.errors %}
               <ul class="errors">
@@ -46,6 +47,7 @@
             {% endif %}
           </fieldset>
 
+          <!-- Password -->
           <fieldset class="form-field">{{ form.password.label }} {{ form.password }}
             {% if form.password.errors %}
               <ul class="errors">
@@ -58,6 +60,7 @@
             {% endif %}
           </fieldset>
 
+          <!-- Confirm Password -->
           <fieldset class="form-field">{{ form.confirmPassword.label }} {{ form.confirmPassword }}
             {% if form.confirmPassword.errors %}
               <ul class="errors">
@@ -70,6 +73,7 @@
             {% endif %}
           </fieldset>
   
+          <!-- do this later {{ form.recaptcha }} -->
           {{ form.submit }}
   
         </form>

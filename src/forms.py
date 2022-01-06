@@ -30,4 +30,5 @@ class RegisterForm(FlaskForm):
         [EqualTo("password", message="Passwords must match.")]
     )
 
+    # recaptcha = RecaptchaField() todo: do later
     submit = SubmitField("Submit")
