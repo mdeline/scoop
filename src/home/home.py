@@ -23,7 +23,7 @@ def home():
 @result_bp.route("/result")
 def result():
     query = request.args["query"]
-    sql = "SELECT name, description, address FROM restaurant WHERE address LIKE :query"
+    sql = "SELECT name, description, address FROM restaurant WHERE address LIKE :query" # todo: modify to use lower case
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     restaurants = result.fetchall()
     return render_template(
