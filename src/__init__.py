@@ -25,6 +25,7 @@ def create_app():
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
+        app.register_blueprint(home.result_bp)
         app.register_blueprint(login.login_pb)
         app.register_blueprint(register.register_pb)
         app.register_blueprint(register.success_pb)
