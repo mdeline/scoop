@@ -12,3 +12,5 @@ def home():
         "home.jinja2",
         template="home-template"
     )
+
+# todo: tänne hakukenttä
