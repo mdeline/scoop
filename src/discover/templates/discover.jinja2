@@ -1,7 +1,25 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-    <div class="container">
-        <h2>Discover New Restaurants</h2>
-    </div>
+
+  <div class="container">
+  <h2>Discover New Restaurants</h2>
+    {% for restaurant in restaurants %}
+    <ul id="restaurant.name">
+      <li>
+        <span class="field-name">Restaurant:</span>
+        <span class="field-value">{{ restaurant.name }}</span>
+      </li>
+      <li>
+        <span class="field-name">Description:</span>
+        <span class="field-value">{{ restaurant.description }}</span>
+      </li>
+      <li>
+        <span class="field-name">Address:</span>
+        <span class="field-value">{{ restaurant.address }}</span>
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+
 {% endblock %}

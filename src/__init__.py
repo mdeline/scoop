@@ -20,8 +20,8 @@ def create_app():
         from .register import register
         from .discover import discover
         from . import forms
+        from . import models
 
-        # Create database tables
         db.create_all()
 
         # Register Blueprints
