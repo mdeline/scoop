@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from ..models import Restaurant, db
+from .. import db
 
 discover_pb = Blueprint(
     'discover_pb', __name__,

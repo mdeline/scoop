@@ -19,9 +19,6 @@ def create_app():
         from .register import register
         from .discover import discover
         from . import forms
-        from . import models
-
-        db.create_all()
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
