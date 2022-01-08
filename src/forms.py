@@ -32,3 +32,19 @@ class RegisterForm(FlaskForm):
 
     # recaptcha = RecaptchaField() todo: do later
     submit = SubmitField("Submit")
+
+class LoginForm(FlaskForm):
+    email = StringField(
+        'Email',
+        validators=[
+            DataRequired(),
+            Email(message='Email format is invalid.')
+        ]
+    )
+    password = PasswordField(
+        'Password',
+        validators=[
+            DataRequired()
+        ]
+    )
+    submit = SubmitField('Log In')
