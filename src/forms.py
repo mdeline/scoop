@@ -9,12 +9,8 @@ from wtforms import (
 from wtforms.validators import URL, DataRequired, Email, EqualTo, Length
 
 class RegisterForm(FlaskForm):
-    first_name = StringField(
-        'First Name',
-        [DataRequired()]
-    )
-    last_name = StringField(
-        'Last Name',
+    name = StringField(
+        'Name',
         [DataRequired()]
     )
     email = StringField(

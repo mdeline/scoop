@@ -9,10 +9,10 @@
             {{ form.csrf_token }}
 
             <!-- First Name -->
-            <fieldset class="form-field">{{ form.first_name.label }} {{ form.first_name }}
-            {% if form.first_name.errors %}
+            <fieldset class="form-field">{{ form.name.label }} {{ form.name }}
+            {% if form.name.errors %}
               <ul class="errors">
-                {% for error in form.first_name.errors %}
+                {% for error in form.name.errors %}
                   <li class="error">
                       <i class="fas fa-exclamation"></i> <span class="error-message">{{ error }}</span>
                   </li>
@@ -20,19 +20,6 @@
               </ul>
             {% endif %}
             </fieldset>
-
-            <!-- Last Name -->
-            <fieldset class="form-field">{{ form.last_name.label }} {{ form.last_name }}
-            {% if form.last_name.errors %}
-              <ul class="errors">
-                {% for error in form.last_name.errors %}
-                  <li class="error">
-                      <i class="fas fa-exclamation"></i> <span class="error-message">{{ error }}</span>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </fieldset>
 
           <!-- Email -->
           <fieldset class="form-field">{{ form.email.label }} {{ form.email }}
