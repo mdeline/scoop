@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, session
-from ..forms import RegisterForm, LoginForm # Needed to add this import to __init__.py first
+from werkzeug.security import check_password_hash, generate_password_hash
 from os import getenv
+from ..forms import RegisterForm, LoginForm # Needed to add this import to __init__.py first
+from .. import db
 
 auth_bp = Blueprint(
     'auth_bp', __name__,
@@ -11,7 +13,6 @@ auth_bp = Blueprint(
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
-    # Validate login attempt
     if login_form.validate_on_submit():
         return redirect(url_for("auth_bp.success"))
     return render_template(
@@ -24,12 +25,16 @@ def login():
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
-    register_form = RegisterForm()
-    if register_form.validate_on_submit():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        hash_value = generate_password_hash(form.password.data)
+        sql = "INSERT INTO scoop.user (name, email, password) VALUES (:name, :email, :password)"
+        db.session.execute(sql, {"name":form.name.data, "email":form.email.data, "password":hash_value})
+        db.session.commit()
         return redirect(url_for("auth_bp.success"))
     return render_template(
         "register.jinja2",
-        form=register_form,
+        form=form,
         template="register-template"
     )
 
