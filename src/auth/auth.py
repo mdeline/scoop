@@ -12,15 +12,20 @@ auth_bp = Blueprint(
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    login_form = LoginForm()
-    if login_form.validate_on_submit():
-        return redirect(url_for("auth_bp.success"))
+    form = LoginForm()
+    failed_login = ''
+    if form.validate_on_submit():
+        sql = 'select * from scoop.user where email = :email'
+        user = db.session.execute(sql, {'email': form.email.data}).first()
+        if user and form.password.data == user.password:
+            return redirect(url_for("auth_bp.success"))
+        failed_login = 'Invalid email or password.'
     return render_template(
         'login.jinja2',
-        form=login_form,
+        form=form,
         title='Log in.',
         template='login-page',
-        body="Log in with your User account."
+        failed_login = failed_login
     )
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
