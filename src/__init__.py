@@ -9,23 +9,20 @@ def create_app():
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object("config.Config")
 
-    # Initialize database
+    # Initialize Plugins
     db.init_app(app)
 
     with app.app_context():
         # Import parts of our application
         from .home import home
-        from .login import login
-        from .register import register
+        from .auth import auth
         from .discover import discover
         from . import forms
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
-        app.register_blueprint(home.result_bp)
-        app.register_blueprint(login.login_pb)
-        app.register_blueprint(register.register_pb)
-        app.register_blueprint(register.success_pb)
+        app.register_blueprint(home.result_bp) # todo: fix
+        app.register_blueprint(auth.auth_bp)
         app.register_blueprint(discover.discover_pb)
 
         return app
