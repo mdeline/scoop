@@ -21,7 +21,6 @@ def create_app():
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
-        app.register_blueprint(home.result_bp) # todo: fix
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(discover.discover_pb)
 

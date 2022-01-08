@@ -7,12 +7,6 @@ home_bp = Blueprint(
     static_folder='static'
 )
 
-result_bp = Blueprint(
-    'result_bp', __name__,
-    template_folder='templates',
-    static_folder='static'
-)
-
 @home_bp.route("/", methods=["GET"])
 def home():
     return render_template(
@@ -20,7 +14,7 @@ def home():
         template="home-template"
     )
 
-@result_bp.route("/result")
+@home_bp.route("/result")
 def result():
     query = request.args["query"]
     sql = "SELECT name, description, address FROM restaurant WHERE address LIKE :query" # todo: modify to use lower case
