@@ -18,7 +18,9 @@ def home():
 def result():
     query = request.args["query"].lower()
     sql =   ("SELECT * FROM restaurant " 
-            + "WHERE lower(address) LIKE :query;") 
+            + "WHERE lower(address) LIKE :query "
+            + "OR postalcode LIKE :query "
+            + "OR lower(city) LIKE :query")
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     restaurants = result.fetchall()
     return render_template(
