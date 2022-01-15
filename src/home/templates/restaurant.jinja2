@@ -1,0 +1,23 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+
+  <div class="container">
+  <h2>Restaurant Reviews</h2>
+  <h3>Restaurant: {{ restaurant.name }}</h3>
+    {% for review in reviews %}
+    <ul>
+      <li>
+        <span class="field-value">{{ review.review }}</span>
+      </li>
+      <li>
+        <span class="field-value">{{ review.forks }} forks</span>
+      </li>
+        <span class="field-value">{{ review.user }}</span>
+      </li>
+
+    </ul>
+    {% endfor %}
+  </div>
+
+{% endblock %}
