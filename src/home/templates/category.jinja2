@@ -1,0 +1,10 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+    <div class="container">
+        <h3>Category</h3>
+        {% for category in categories %}
+            <h4>{{ category.name }} ff</h4>
+        {% endfor %}
+    </div>
+{% endblock %}

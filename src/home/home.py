@@ -9,9 +9,12 @@ home_bp = Blueprint(
 
 @home_bp.route("/", methods=["GET"])
 def home():
+    result = db.session.execute('select * from category')
+    categories = result.fetchall()
     return render_template(
         "home.jinja2",
-        template="home-template"
+        template = "home-template",
+        categories = categories
     )
 
 @home_bp.route("/result")
@@ -52,3 +55,4 @@ def restaurant(restaurant_id):
         restaurant=restaurant,
         reviews=reviews
     )
+
