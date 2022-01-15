@@ -40,7 +40,8 @@ def restaurant(restaurant_id):
 
     # Reviews
     result = db.session.execute(
-        'select review, forks from review '
+        'select review, forks, scoop.user.name as user from review '
+        + 'inner join scoop.user on scoop.user.id = review.user_id '
         + 'where restaurant_id = :id '
         + 'order by created_at desc',
         {'id':restaurant_id})
