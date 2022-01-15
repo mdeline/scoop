@@ -2,9 +2,9 @@
 
 {% block content %}
     <div class="container">
-        <h3>Category</h3>
-        {% for category in categories %}
-            <h4>{{ category.name }} ff</h4>
+        {% for restaurant in restaurants %}
+            <h4>{{ restaurant.name }}</h4>
+            <a href="/restaurant/{{ restaurant.id }}">See Reviews</a>
         {% endfor %}
     </div>
 {% endblock %}

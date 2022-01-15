@@ -17,6 +17,23 @@ def home():
         categories = categories
     )
 
+@home_bp.route('/category/<category_id>', methods=['GET'])
+def restaurantsByCategory(category_id):
+     # Selected category's restaurants
+    result = db.session.execute(
+        'select * from restaurant '
+        + 'inner join restaurantcategory rc on rc.restaurant_id = restaurant.id '
+        + 'where rc.category_id = :category_id '
+        + 'order by restaurant.name desc',
+        {'category_id':category_id})
+
+    restaurants = result.fetchall()
+
+    return render_template(
+        'category.jinja2',
+        restaurants=restaurants,
+    )
+
 @home_bp.route("/result")
 def result():
     query = request.args["query"].lower()
