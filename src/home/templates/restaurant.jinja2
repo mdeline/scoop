@@ -8,16 +8,24 @@
     {% for review in reviews %}
     <ul>
       <li>
-        <span class="field-value">{{ review.review }}</span>
+        {% for x in range(1, (review.forks + 1)) %}
+          <img src="/static/fork.png" width="20">
+        {% endfor %}
       </li>
-      <li>
-        <span class="field-value">{{ review.forks }} forks</span>
-      </li>
-        <span class="field-value">{{ review.user }}</span>
-      </li>
+      <li>{{ review.review }}</li>
 
+      <li>{{review.user}}</li>
+      <hr>
     </ul>
     {% endfor %}
+
+    <h4>Add a Review</h4>
+    <form action="/result" method="GET">
+        Review: <input type="text" name="query">
+        <br>
+        <input type="submit" value="Send">
+    </form>
+
   </div>
 
 {% endblock %}
