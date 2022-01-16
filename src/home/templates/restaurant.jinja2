@@ -20,12 +20,20 @@
     {% endfor %}
 
     <h4>Add a Review</h4>
-    <form action="/result" method="GET">
+    <form action="/review" method="POST">
         Review: <input type="text" name="query">
         <br>
+        <tr>
+          <td><input type="radio" name="">1</td>
+          <td><input type="radio">2</td>
+          <td><input type="radio">3</td>
+          <td><input type="radio">4</td>
+          <td><input type="radio">5</td>
+        </tr>
+        <br>
         <input type="submit" value="Send">
+        <input type="hidden" name="restaurant_id" value="{{ restaurant.id}}">
     </form>
-
   </div>
 
 {% endblock %}

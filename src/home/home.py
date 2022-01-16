@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from .. import db
 
 home_bp = Blueprint(
@@ -50,10 +50,9 @@ def result():
 
 @home_bp.route('/restaurant/<restaurant_id>', methods=['GET'])
 def restaurant(restaurant_id):
-
-     # Restaurant
+    # Restaurant
     result = db.session.execute(
-        'select name from restaurant '
+        'select id, name from restaurant '
         + 'where id = :id',
         {'id':restaurant_id})
     restaurant = result.fetchone()
@@ -72,4 +71,12 @@ def restaurant(restaurant_id):
         restaurant=restaurant,
         reviews=reviews
     )
+
+@home_bp.route('/review', methods=['POST'])
+def review():
+    restaurant_id = request.form["restaurant_id"]
+    sql = 'insert into review(review, forks, user_id, restaurant_id, created_at) values(:review, 3, 1, 1, now())'
+    db.session.execute(sql, {"review":"It was Okay"})
+    db.session.commit()
+    return redirect(url_for("home_bp.restaurant", restaurant_id=restaurant_id))
 
