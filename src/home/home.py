@@ -38,8 +38,8 @@ def restaurantsByCategory(category_id):
 def result():
     query = request.args["query"].lower()
     sql =   ("SELECT * FROM restaurant "
-            + "WHERE lower(address) LIKE :query "
-            + "OR postalcode LIKE :query "
+            + "WHERE lower(street_address) LIKE :query "
+            + "OR postal_code LIKE :query "
             + "OR lower(city) LIKE :query")
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     restaurants = result.fetchall()
