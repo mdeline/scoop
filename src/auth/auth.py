@@ -41,6 +41,7 @@ def login():
         user = db.session.execute(sql, {'email': form.email.data}).first()
         hashed_password = user.password
         if user and check_password_hash(hashed_password, form.password.data):
+            session["name"] = user.name
             return redirect(url_for("auth_bp.success"))
         failed_login = 'Invalid email or password.'
     return render_template(
@@ -53,5 +54,5 @@ def login():
 
 @auth_bp.route("/logout")
 def logout():
-    #del session["username"]
-    return redirect(url_for("home_pb.home"))
+    del session["name"]
+    return redirect(url_for("home_bp.home"))
