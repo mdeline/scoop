@@ -4,7 +4,7 @@
 
   <div class="container">
   <h2>Restaurant Reviews</h2>
-  <h3>Restaurant: {{ restaurant.name }}</h3>
+  <h3>{{ restaurant.name }}</h3>
     {% for review in reviews %}
     <ul>
       <li>
@@ -19,21 +19,36 @@
     </ul>
     {% endfor %}
 
-    <h4>Add a Review</h4>
-    <form action="/review" method="POST">
-        Review: <input type="text" name="query">
-        <br>
-        <tr>
-          <td><input type="radio" name="">1</td>
-          <td><input type="radio">2</td>
-          <td><input type="radio">3</td>
-          <td><input type="radio">4</td>
-          <td><input type="radio">5</td>
-        </tr>
-        <br>
-        <input type="submit" value="Send">
-        <input type="hidden" name="restaurant_id" value="{{ restaurant.id}}">
+    <form method="POST" action="/review">
+
+      <fieldset class="review">
+        {{ form.review(placeholder='Write Your Review.') }}
+        {% if form.review.errors %}
+          <ul class="errors">
+            {% for error in form.review.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+      <h4>How would you sum the experience?</h4>
+      <fieldset class="conclusion">
+        {{ form.conclusion }}
+        {% if form.conclusion.errors %}
+          <ul class="errors">
+            {% for error in form.conclusion.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+      <div class="submit-button">
+        {{ form.submit }}
+      </div>
+
+      <input type="hidden" name="restaurant_id" value="{{ restaurant.id}}">
     </form>
+
   </div>
 
 {% endblock %}

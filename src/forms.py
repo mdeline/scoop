@@ -4,6 +4,7 @@ from wtforms import (
     PasswordField,
     SelectField,
     StringField,
+    RadioField,
     SubmitField
 )
 from wtforms.validators import URL, DataRequired, Email, EqualTo, Length
@@ -25,7 +26,6 @@ class RegisterForm(FlaskForm):
         "Repeat Password",
         [EqualTo("password", message="Passwords must match.")]
     )
-
     # recaptcha = RecaptchaField() todo: do later
     submit = SubmitField("Submit")
 
@@ -44,3 +44,25 @@ class LoginForm(FlaskForm):
         ]
     )
     submit = SubmitField('Log In')
+
+
+class ReviewForm(FlaskForm):
+    review = StringField(
+        'Review',
+        validators=[
+            DataRequired()
+        ]
+    )
+    conclusion = RadioField(
+        'Conclusion', 
+        choices=[
+            ('1','Would never ever go again.'),
+            ('2','Not Worth It'),
+            ('3', 'It was okay, I guess.'),
+            ('4', 'Had a good time.'),
+            ('5', 'Would definitely visit again.')
+        ],
+        validators=[
+            DataRequired()
+        ])
+    submit = SubmitField('Add a Review')

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from ..forms import ReviewForm
 from .. import db
 
 home_bp = Blueprint(
@@ -68,17 +69,26 @@ def restaurant(restaurant_id):
         {'id':restaurant_id})
     reviews = result.fetchall()
 
+    # Form
+    form = ReviewForm()
+
     return render_template(
         'restaurant.jinja2',
         restaurant=restaurant,
-        reviews=reviews
+        reviews=reviews,
+        form=form
     )
 
 @home_bp.route('/review', methods=['POST'])
 def review():
+    form = ReviewForm()
     restaurant_id = request.form["restaurant_id"]
-    sql = 'insert into review(review, forks, user_id, restaurant_id, created_at) values(:review, 3, 1, 1, now())'
-    db.session.execute(sql, {"review":"It was Okay"})
+    #todo: use form validation
+    sql = 'insert into scoop.review(review, forks, user_id, restaurant_id, created_at) values(:review, 3, :user_id, :restaurant_id, now())'
+    db.session.execute(sql, {
+        'review': form.review.data,
+        'user_id': session["user_id"],
+        'restaurant_id': restaurant_id
+    })
     db.session.commit()
     return redirect(url_for("home_bp.restaurant", restaurant_id=restaurant_id))
-
