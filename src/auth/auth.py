@@ -10,24 +10,6 @@ auth_bp = Blueprint(
     static_folder='static'
 )
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    failed_login = ''
-    if form.validate_on_submit():
-        sql = 'select * from scoop.user where email = :email'
-        user = db.session.execute(sql, {'email': form.email.data}).first()
-        if user and form.password.data == user.password:
-            return redirect(url_for("auth_bp.success"))
-        failed_login = 'Invalid email or password.'
-    return render_template(
-        'login.jinja2',
-        form=form,
-        title='Log in.',
-        template='login-page',
-        failed_login = failed_login
-    )
-
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -49,3 +31,27 @@ def success():
         "success.jinja2",
         template="success-template"
     )
+
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    failed_login = ''
+    if form.validate_on_submit():
+        sql = 'select * from scoop.user where email = :email'
+        user = db.session.execute(sql, {'email': form.email.data}).first()
+        hashed_password = user.password
+        if user and check_password_hash(hashed_password, form.password.data):
+            return redirect(url_for("auth_bp.success"))
+        failed_login = 'Invalid email or password.'
+    return render_template(
+        'login.jinja2',
+        form=form,
+        title='Log in.',
+        template='login-page',
+        failed_login = failed_login
+    )
+
+@auth_bp.route("/logout")
+def logout():
+    #del session["username"]
+    return redirect(url_for("home_pb.home"))
