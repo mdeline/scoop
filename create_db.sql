@@ -118,9 +118,9 @@ create table scoop.review
     venue_id bigint not null,
     appuser_id bigint not null,
     review text not null, 
-    forks int not null,
+    stars int not null,
     created_at timestamptz not null default now(),
-    modified_at timestamptz null default(),
+    modified_at timestamptz null,
     constraint review_pk primary key (id),
     constraint venue_id_fk foreign key(venue_id) references scoop.venue(id),
     constraint appuser_id_fk foreign key(appuser_id) references scoop.appuser(id)

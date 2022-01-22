@@ -4,11 +4,11 @@
 
   <div class="container">
   <h2>Venue Reviews</h2>
-  <h3>{{ restaurant.name }}</h3>
+  <h3>{{ venue.name }}</h3>
     {% for review in reviews %}
     <ul>
       <li>
-        {% for x in range(1, (review.forks + 1)) %}
+        {% for x in range(1, (review.stars + 1)) %}
           <img src="/static/fork.png" width="20">
         {% endfor %}
       </li>
@@ -47,7 +47,7 @@
         {{ form.submit }}
       </div>
 
-      <input type="hidden" name="venue_id" value="{{ venue_id }}">
+      <input type="hidden" name="venue_id" value="{{ venue.id }}">
     </form>
 
   </div>

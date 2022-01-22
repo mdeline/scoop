@@ -2,8 +2,8 @@
     <nav>
      <a href="/">Home</a>
      <a href="/discover">Discover</a>
-      {% if session.user_fullname %}
-        <span>{{ session.user_fullname }}</span>
+      {% if session.appuser_fullname %}
+        <span>{{ session.appuser_fullname }}</span>
         <a href="/logout">Logout</a>
       {% else %}
         <a href="/register">Sign Up</a>

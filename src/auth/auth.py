@@ -36,14 +36,14 @@ def success():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    failed_login = '' # tarvitaanko tätä johonkin?
+    failed_login = ''
     if form.validate_on_submit():
         sql = 'select * from scoop.appuser where email = :email'
-        user = db.session.execute(sql, {'email': form.email.data}).first()
-        hashed_password = user.password
-        if user and check_password_hash(hashed_password, form.password.data):
-            session["user_fullname"] = user.fullname
-            session["user_id"] = user.id
+        appuser = db.session.execute(sql, {'email': form.email.data}).first()
+        hashed_password = appuser.password
+        if appuser and check_password_hash(hashed_password, form.password.data):
+            session["appuser_fullname"] = appuser.fullname
+            session["appuser_id"] = appuser.id
             return redirect(url_for("auth_bp.success"))
         failed_login = 'Invalid email or password.'
     return render_template(
@@ -56,5 +56,5 @@ def login():
 
 @auth_bp.route("/logout")
 def logout():
-    del session["user_fullname"]
+    del session["appuser_fullname"]
     return redirect(url_for("home_bp.home"))
