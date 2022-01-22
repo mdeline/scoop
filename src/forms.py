@@ -56,11 +56,11 @@ class ReviewForm(FlaskForm):
     conclusion = RadioField(
         'Conclusion', 
         choices=[
-            ('1','Would never ever go again.'),
-            ('2','Not Worth It'),
-            ('3', 'It was okay, I guess.'),
-            ('4', 'Had a good time.'),
-            ('5', 'Would definitely visit again.')
+            ('1','1 star.'),
+            ('2','2 stars'),
+            ('3', '3 stars'),
+            ('4', '4 stars'),
+            ('5', '5 stars')
         ],
         validators=[
             DataRequired()

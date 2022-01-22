@@ -13,20 +13,21 @@
         {% endfor %}
       </li>
       <li>{{ review.review }}</li>
-
       <li>{{review.user}}</li>
       <hr>
     </ul>
     {% endfor %}
 
-    <form method="POST" action="/review">
+    <form method="POST" action="/restaurant/review">
 
+      <h4>Write a review</h4>
       <fieldset class="review">
         {{ form.review(placeholder='Write Your Review.') }}
         {% if form.review.errors %}
           <ul class="errors">
             {% for error in form.review.errors %}
-              <li>{{ error }}</li>{% endfor %}
+              <li>{{ error }}</li>
+            {% endfor %}
           </ul>
         {% endif %}
       </fieldset>

@@ -15,12 +15,14 @@ def create_app():
     with app.app_context():
         # Import parts of our application
         from .home import home
+        from .venue import venue
         from .auth import auth
         from .discover import discover
         from . import forms
 
         # Register Blueprints
         app.register_blueprint(home.home_bp)
+        app.register_blueprint(venue.venue_bp)
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(discover.discover_pb)
 
