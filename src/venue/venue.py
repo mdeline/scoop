@@ -8,22 +8,22 @@ venue_bp = Blueprint(
     static_folder='static'
 )
 
-@venue_bp.route('/venue/<restaurant_id>', methods=['GET'])
-def restaurant(restaurant_id):
+@venue_bp.route('/venue/<venue_id>', methods=['GET'])
+def restaurant(venue_id):
     # List restaurant information
     result = db.session.execute(
-        'select id, name from restaurant '
-        + 'where id = :restaurant_id',
-        {'restaurant_id':restaurant_id})
+        'select id, name from scoop.venue '
+        + 'where id = :venue_id',
+        {'venue_id':venue_id})
     restaurant = result.fetchone()
 
     # Reviews
     result = db.session.execute(
         'select review, forks, scoop.user.name as user from review '
         + 'inner join scoop.user on scoop.user.id = review.user_id '
-        + 'where restaurant_id = :restaurant_id '
+        + 'where venue_id = :venue_id '
         + 'order by created_at desc',
-        {'restaurant_id':restaurant_id})
+        {'venue_id':venue_id})
     reviews = result.fetchall()
 
     # Form
@@ -31,7 +31,7 @@ def restaurant(restaurant_id):
 
     return render_template(
         'venue.jinja2',
-        restaurant=restaurant,
+        venues=venues,
         reviews=reviews,
         form=form
     )
@@ -39,9 +39,9 @@ def restaurant(restaurant_id):
 @venue_bp.route('/venue/review', methods=['POST'])
 def review():
     form = ReviewForm()
-    restaurant_id = request.form["restaurant_id"]
+    venue_id = request.form["venue_id"]
     #todo: use form validation
-    sql = 'insert into scoop.review(review, forks, user_id, restaurant_id, created_at) values(:review, 3, :user_id, :restaurant_id, now())'
+    sql = 'insert into scoop.review(review, forks, user_id, venue_id) values(:review, 3, :user_id, :venue_id)'
     if session["user_id"]:
         user_id = session["user_id"]
     else:
@@ -49,9 +49,9 @@ def review():
     db.session.execute(sql, {
         'review': form.review.data,
         'user_id': session["user_id"],
-        'restaurant_id': restaurant_id
+        'venue_id': venue_id
     })
     db.session.commit()
-    return redirect(url_for("venue_bp.restaurant", restaurant_id=restaurant_id))
+    return redirect(url_for("venue_bp.restaurant", venue_id=venue_id))
 
 

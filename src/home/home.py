@@ -19,34 +19,34 @@ def home():
     )
 
 @home_bp.route('/category/<category_id>', methods=['GET'])
-def restaurantsByCategory(category_id):
-     # Selected category's restaurants
+def venuesByCategory(category_id):
+     # Selected category's venues
     result = db.session.execute(
-        'select * from restaurant '
-        + 'inner join restaurantcategory rc on rc.restaurant_id = restaurant.id '
-        + 'where rc.category_id = :category_id '
-        + 'order by restaurant.name desc',
+        'select * from scoop.venue '
+        + 'inner join scoop.venuecategory vc on vc.venue_id = venue.id '
+        + 'where vc.category_id = :category_id '
+        + 'order by venue.name desc',
         {'category_id':category_id})
 
-    restaurants = result.fetchall()
+    venues = result.fetchall()
 
     return render_template(
         'category.jinja2',
-        restaurants=restaurants,
+        venues=venues,
     )
 
 @home_bp.route("/result")
 def result():
     query = request.args["query"].lower()
-    sql =   ("SELECT * FROM restaurant "
-            + "WHERE lower(street_address) LIKE :query "
-            + "OR postal_code LIKE :query "
-            + "OR lower(city) LIKE :query " 
-            + "OR lower(neighbourhood) LIKE :query"
+    sql =   ("select * from scoop.venue "
+            + "where lower(street_address) like :query "
+            + "or postal_code like :query "
+            + "or lower(city) like :query " 
+            + "or lower(neighbourhood) like :query"
             )
     result = db.session.execute(sql, {"query":"%"+query+"%"})
-    restaurants = result.fetchall()
+    venues = result.fetchall()
     return render_template(
         "result.jinja2", 
-        restaurants=restaurants
+        venues=venues
     )

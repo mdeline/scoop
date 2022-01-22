@@ -4,31 +4,31 @@
 
   <div class="container">
   <h2>Query Results</h2>
-    {% for restaurant in restaurants %}
-    <h3>{{ restaurant.name }} </h3>
-    <ul id="restaurant.name">
+    {% for venue in venues %}
+    <h3>{{ venue.name }} </h3>
+    <ul id="venue.name">
       <li>
-        <span class="field-name">Restaurant:</span>
-        <span class="field-value">{{ restaurant.name }}</span>
+        <span class="field-name">Venue:</span>
+        <span class="field-value">{{ venue.name }}</span>
       </li>
       <li>
         <span class="field-name">Description:</span>
-        <span class="field-value">{{ restaurant.description }}</span>
+        <span class="field-value">{{ venue.description }}</span>
       </li>
       <li>
         <span class="field-name">Address:</span>
-        <span class="field-value">{{ restaurant.address }}</span>
+        <span class="field-value">{{ venue.address }}</span>
       </li>
       <li>
         <span class="field-name">Postal Code:</span>
-        <span class="field-value">{{ restaurant.postal_code }}</span>
+        <span class="field-value">{{ venue.postal_code }}</span>
       </li>
       <li>
         <span class="field-name">City:</span>
-        <span class="field-value">{{ restaurant.city }}</span>
+        <span class="field-value">{{ venue.city }}</span>
       </li>
     </ul>
-    <a href="/venue/{{ restaurant.id }}">See Reviews</a>
+    <a href="/venue/{{ venue.id }}">See Reviews</a>
     {% endfor %}
   </div>
 

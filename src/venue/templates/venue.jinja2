@@ -3,7 +3,7 @@
 {% block content %}
 
   <div class="container">
-  <h2>Restaurant Reviews</h2>
+  <h2>Venue Reviews</h2>
   <h3>{{ restaurant.name }}</h3>
     {% for review in reviews %}
     <ul>
@@ -47,7 +47,7 @@
         {{ form.submit }}
       </div>
 
-      <input type="hidden" name="restaurant_id" value="{{ restaurant.id}}">
+      <input type="hidden" name="venue_id" value="{{ venue_id }}">
     </form>
 
   </div>

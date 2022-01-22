@@ -9,9 +9,9 @@ discover_pb = Blueprint(
 
 @discover_pb.route('/discover', methods=['GET'])
 def discover():
-    result = db.session.execute('SELECT * FROM restaurant')
-    restaurants = result.fetchall()
+    result = db.session.execute('select * from venue')
+    venues = result.fetchall()
     return render_template(
         'discover.jinja2',
-        restaurants=restaurants
+        venues=venues
     )
