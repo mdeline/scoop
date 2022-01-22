@@ -8,7 +8,7 @@ venue_bp = Blueprint(
     static_folder='static'
 )
 
-@venue_bp.route('/restaurant/<restaurant_id>', methods=['GET'])
+@venue_bp.route('/venue/<restaurant_id>', methods=['GET'])
 def restaurant(restaurant_id):
     # List restaurant information
     result = db.session.execute(
@@ -30,18 +30,22 @@ def restaurant(restaurant_id):
     form = ReviewForm()
 
     return render_template(
-        'restaurant.jinja2',
+        'venue.jinja2',
         restaurant=restaurant,
         reviews=reviews,
         form=form
     )
 
-@venue_bp.route('/restaurant/review', methods=['POST'])
+@venue_bp.route('/venue/review', methods=['POST'])
 def review():
     form = ReviewForm()
     restaurant_id = request.form["restaurant_id"]
     #todo: use form validation
     sql = 'insert into scoop.review(review, forks, user_id, restaurant_id, created_at) values(:review, 3, :user_id, :restaurant_id, now())'
+    if session["user_id"]:
+        user_id = session["user_id"]
+    else:
+        user_id = None
     db.session.execute(sql, {
         'review': form.review.data,
         'user_id': session["user_id"],
