@@ -1,10 +1,15 @@
 import requests, json
 import psycopg2
+from os import environ, path
+from dotenv import load_dotenv
+
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv(path.join(basedir, ".env"))
 
 try:
     conn = psycopg2.connect(
-            user="",
-            password="",
+            user=environ.get("DB_USER"),
+            password=environ.get("DB_PASSWORD"),
             host="localhost",
             port="5432",
             database="scoop"
@@ -17,7 +22,7 @@ helsinki_places_json = requests.get('http://open-api.myhelsinki.fi/v2/places/').
 data = helsinki_places_json["data"]
 
 for place in data:
-    insert_query = "insert into scoop.restaurant(id, name, info_url, description, street_address, postal_code, city, neighbourhood) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_query = "insert into scoop.venue(id, name, info_url, description, street_address, postal_code, city, neighbourhood) values (%s, %s, %s, %s, %s, %s, %s, %s)"
     if place["name"]["fi"] == None:
         continue
 

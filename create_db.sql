@@ -95,6 +95,7 @@ create table scoop.appuser (
 );
 
 -- Venue
+drop table if exists scoop.restaurant, scoop.venue;
 create table scoop.venue (
     id serial not null,
     name text not null,
@@ -104,8 +105,9 @@ create table scoop.venue (
     postal_code varchar(5) not null,
     city varchar(50) not null,
     neighbourhood varchar(50) null,
+	created_at timestamp with time zone not null default now(),
     constraint restaurant_pk primary key (id)
-    -- constraint restaurant_name_uk unique (name)
+    -- constraint venue_name_uk unique (name)
 );
 
 -- Review
