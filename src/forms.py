@@ -53,16 +53,17 @@ class ReviewForm(FlaskForm):
             DataRequired()
         ]
     )
-    conclusion = RadioField(
-        'Conclusion', 
+    ratearea = RadioField(
+        'Rating', 
         choices=[
-            ('1','1 star.'),
-            ('2','2 stars'),
-            ('3', '3 stars'),
-            ('4', '4 stars'),
-            ('5', '5 stars')
+            ('5', '1 star.'), # id = rate-area-5 , value = 5
+            ('4', '2 stars'), # id = rate-area-4, value = 4
+            ('3', '3 stars'), # id = rate-area-3, value = 3
+            ('2', '4 stars'),
+            ('1', '5 stars')
         ],
         validators=[
             DataRequired()
         ])
     submit = SubmitField('Add a Review')
+

@@ -41,14 +41,19 @@ def venue(venue_id):
 
 @venue_bp.route('/review', methods=['POST'])
 def review():
-    form = ReviewForm()
+    review = request.form["review"]
+    rating = request.form["rating"]
+    appuser_id = session["appuser_id"]
     venue_id = request.form["venue_id"]
+    
     #todo: use form validation
-    sql = 'insert into scoop.review(review, stars, appuser_id, venue_id) values(:review, 3, :appuser_id, :venue_id)'
+    sql = 'insert into scoop.review(review, stars, appuser_id, venue_id) values(:review, :rating, :appuser_id, :venue_id)'
     db.session.execute(sql, {
-        'review': form.review.data,
-        'appuser_id': session["appuser_id"],
-        'venue_id': venue_id
+        'review': review,
+        'rating': rating,
+        'appuser_id': appuser_id,
+        'venue_id': venue_id,
+        
     })
     db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))
