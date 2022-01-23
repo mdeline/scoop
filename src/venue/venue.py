@@ -8,9 +8,12 @@ venue_bp = Blueprint(
     static_folder='static'
 )
 
-@venue_bp.route('/venue/<venue_id>', methods=['GET'])
+@venue_bp.route('/<venue_id>', methods=['GET'])
 def venue(venue_id):
     # List restaurant information
+    url_prefix=venue_bp.name
+    print(url_prefix)
+
     result = db.session.execute(
         'select id, name from scoop.venue '
         + 'where id = :venue_id',
@@ -36,7 +39,7 @@ def venue(venue_id):
         form=form
     )
 
-@venue_bp.route('/venue/review', methods=['POST'])
+@venue_bp.route('/review', methods=['POST'])
 def review():
     form = ReviewForm()
     venue_id = request.form["venue_id"]
@@ -49,5 +52,3 @@ def review():
     })
     db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))
-
-

@@ -1,6 +1,22 @@
 {% extends "layout.jinja2" %}
 
+{% block styles %}
+
+    <link
+        rel="stylesheet"
+        href="/venue/static/venue.css"
+        type="text/css"
+    />
+
+{% endblock %}
+
 {% block content %}
+
+  <link
+        rel="stylesheet"
+        href="/venue/static/venue.css"
+        type="text/css"
+    />
 
   <div class="container">
   <h2>Venue Reviews</h2>
@@ -9,7 +25,7 @@
     <ul>
       <li>
         {% for x in range(1, (review.stars + 1)) %}
-          <img src="/static/fork.png" width="20">
+          <img src="/venue/static/fork.png" width="20">
         {% endfor %}
       </li>
       <li>{{ review.review }}</li>
