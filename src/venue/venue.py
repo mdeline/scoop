@@ -10,19 +10,31 @@ venue_bp = Blueprint(
 
 @venue_bp.route('/<venue_id>', methods=['GET'])
 def venue(venue_id):
-    # List restaurant information
     url_prefix=venue_bp.name
     print(url_prefix)
 
+    # Venue info
     result = db.session.execute(
-        'select id, name from scoop.venue '
+        'select * from scoop.venue '
         + 'where id = :venue_id',
-        {'venue_id':venue_id})
+        {'venue_id': venue_id}
+    )
     venue = result.fetchone()
+
+    # Review count & review average
+    result = db.session.execute(
+        'select avg(stars)::numeric(3,2) as review_avg, '
+        + 'count(stars) as review_count '
+        + 'from scoop.review '
+        + 'where venue_id = :venue_id',
+        {'venue_id': venue_id}
+    )
+    review_aggregates = result.fetchone()
 
     # Reviews
     result = db.session.execute(
-        'select review, stars, appuser.fullname as user from review '
+        'select review, stars, appuser.fullname as user, created_at '
+        + 'from review '
         + 'inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id '
         + 'where venue_id = :venue_id '
         + 'order by created_at desc',
@@ -35,6 +47,7 @@ def venue(venue_id):
     return render_template(
         'venue.jinja2',
         venue=venue,
+        review_aggregates=review_aggregates,
         reviews=reviews,
         form=form
     )

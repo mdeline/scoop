@@ -8,22 +8,54 @@
         type="text/css"
     />
 
-  <div class="container">
-  <h2>Venue Reviews</h2>
-  <h3>{{ venue.name }}</h3>
-    {% for review in reviews %}
-    <ul>
-      <li>
-        {% for x in range(1, (review.stars + 1)) %}
-          <img src="/venue/static/fork.png" width="20">
-        {% endfor %}
-      </li>
-      <li>{{ review.review }}</li>
-      <li>{{review.user}}</li>
-      <hr>
-    </ul>
-    {% endfor %}
+  <div class="venueInfo">
+    <h1>{{ venue.name }} ({{venue.neighbourhood}})</h1>
+    <table id = "review_aggregates">
+      <tr>
+        <td>{{ review_aggregates.review_avg }} average rating,</td>
+        <td>{{ review_aggregates.review_count }} ratings</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td>{{ venue.description }}</td>
+      </tr>
+      <tr>
+        <td>{{ venue.street_address }}, </td>
+      </tr>
+      <tr>
+        <td>{{ venue.postal_code }}</td>
+      </tr>
+      <tr>
+        <td>{{ venue.city }}</td>
+      </tr>
 
+    </table>
+  </div>
+    
+  <div class = "community_review>">
+    <h2>Community reviews</h2>
+    {% for review in reviews %}
+      <table id = "individual_review">
+        <tr>
+          <td>{{ review.user }} rated it 
+            {% for x in range(1, (review.stars + 1)) %}
+              <img src="/venue/static/fork.png" width="20">
+            {% endfor %}
+          </td>
+          <td>{{ review.created_at.strftime('%d.%m.%Y') }}</td>
+        </tr>
+        <tr>
+          <td>{{ review.review }}</td>
+        </tr>
+      </table>
+    {% endfor %}
+  </div>
+
+
+
+
+    <div>
     <form method="POST" action="/venue/review">
      <h4>Add a Review</h4>
      <br>
