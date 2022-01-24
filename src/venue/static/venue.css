@@ -5,6 +5,12 @@ h2 {
 td {
 	padding: 0.3em;
 }
+
+#review_field {
+	height: 100px;
+}
+
+
 .rate-area {
 	float: left;
 	border-style: none;
@@ -31,12 +37,12 @@ td {
 }
 
 .rate-area > input:checked ~ label {
-	color: gold;
+	color: orangered;
 }
 
 .rate-area:not(:checked) > label:hover,
 .rate-area:not(:checked) > label:hover ~ label {
-	color: gold;
+	color: orangered;
 }
 
 .rate-area > input:checked + label:hover,
@@ -44,5 +50,5 @@ td {
 .rate-area > input:checked ~ label:hover,
 .rate-area > input:checked ~ label:hover ~ label,
 .rate-area > label:hover ~ input:checked ~ label {
-	color: gold;
+	color: orangered;
 }

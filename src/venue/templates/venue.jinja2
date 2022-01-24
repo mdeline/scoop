@@ -1,15 +1,14 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-
   <link
         rel="stylesheet"
         href="/venue/static/venue.css"
         type="text/css"
-    />
+  />
 
   <div class="venueInfo">
-    <h1>{{ venue.name }} ({{venue.neighbourhood}})</h1>
+    <h1>{{ venue.name }} (<a href="/result?query={{ venue.neighbourhood }}">{{ venue.neighbourhood }}</a>)</h1>
     <hr>
     <table id = "review_aggregates">
       <tr>
@@ -47,27 +46,37 @@
     {% endfor %}
   </div>
 
-
-
-
-    <div>
+  <div id = "add_review">
+    <h3>Start a review</h3>
+    <hr>
     <form method="POST" action="/venue/review">
-     <h4>Add a Review</h4>
-     <br>
-     <input type="text" id="" name="review" />
-     <br>
-     <ul class="rate-area">
-	      <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>
-	      <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="I would recommend.">4 stars</label>
-	      <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="It was okay, I guess.">3 stars</label>
-	      <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not worth it.">2 stars</label>
-	      <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Would never ever visit again.">1 star</label>
-      </ul>
-      <br>
-      <input type="submit" value="Add a review." />
-      <input type="hidden" name="venue_id" value="{{ venue.id }}">
+    <table>
+      <tr>
+        <td>My rating:</td>
+      </tr>
+      <tr>
+        <td>
+          <ul class="rate-area">
+	          <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>
+	          <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="I would recommend.">4 stars</label>
+	          <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="It was okay, I guess.">3 stars</label>
+	          <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not worth it.">2 stars</label>
+	          <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Would never ever visit again.">1 star</label>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>How did you like it?</td>
+      </tr>
+      <tr>
+        <td><input type="text" id="review_field" name="review" size="50" /></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="Add a review." /></td>
+      </tr>
+    </table>
+    <input type="hidden" name="venue_id" value="{{ venue.id }}">
     </form>
-
   </div>
 
 {% endblock %}
