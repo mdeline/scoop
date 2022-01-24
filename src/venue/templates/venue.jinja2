@@ -10,6 +10,7 @@
 
   <div class="venueInfo">
     <h1>{{ venue.name }} ({{venue.neighbourhood}})</h1>
+    <hr>
     <table id = "review_aggregates">
       <tr>
         <td>{{ review_aggregates.review_avg }} average rating,</td>
@@ -21,26 +22,20 @@
         <td>{{ venue.description }}</td>
       </tr>
       <tr>
-        <td>{{ venue.street_address }}, </td>
+        <td>{{ venue.street_address }}, {{ venue.postal_code }} {{ venue.city }} </td>
       </tr>
-      <tr>
-        <td>{{ venue.postal_code }}</td>
-      </tr>
-      <tr>
-        <td>{{ venue.city }}</td>
-      </tr>
-
     </table>
   </div>
     
   <div class = "community_review>">
     <h2>Community reviews</h2>
+    <hr>
     {% for review in reviews %}
       <table id = "individual_review">
         <tr>
           <td>{{ review.user }} rated it 
             {% for x in range(1, (review.stars + 1)) %}
-              <img src="/venue/static/fork.png" width="20">
+              <span>★</span>
             {% endfor %}
           </td>
           <td>{{ review.created_at.strftime('%d.%m.%Y') }}</td>

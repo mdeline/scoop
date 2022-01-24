@@ -2,6 +2,9 @@ h2 {
     text-align: left;
 }
 
+td {
+	padding: 0.3em;
+}
 .rate-area {
 	float: left;
 	border-style: none;
