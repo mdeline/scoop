@@ -24,6 +24,6 @@ def create_app():
         app.register_blueprint(home.home_bp)
         app.register_blueprint(venue.venue_bp, url_prefix='/venue')
         app.register_blueprint(auth.auth_bp)
-        app.register_blueprint(discover.discover_pb)
+        app.register_blueprint(discover.discover_pb, url_prefix='/discover')
 
         return app

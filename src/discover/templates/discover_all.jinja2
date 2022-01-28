@@ -1,0 +1,35 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+
+  <div class="container">
+  <h1>Discover new restaurants and cafes</h1>
+    {% for venue in venues %}
+    <h3>{{ venue.name }} </h3>
+    <ul id="venue.name">
+      <li>
+        <span class="field-name">Venue:</span>
+        <span class="field-value">{{ venue.name }}</span>
+      </li>
+      <li>
+        <span class="field-name">Description:</span>
+        <span class="field-value">{{ venue.description }}</span>
+      </li>
+      <li>
+        <span class="field-name">Address:</span>
+        <span class="field-value">{{ venue.address }}</span>
+      </li>
+      <li>
+        <span class="field-name">Postal Code:</span>
+        <span class="field-value">{{ venue.postal_code }}</span>
+      </li>
+      <li>
+        <span class="field-name">City:</span>
+        <span class="field-value">{{ venue.city }}</span>
+      </li>
+    </ul>
+    <a href="/venue/{{ venue.id }}">See Reviews</a>
+    {% endfor %}
+  </div>
+
+{% endblock %}

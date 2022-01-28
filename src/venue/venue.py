@@ -10,9 +10,6 @@ venue_bp = Blueprint(
 
 @venue_bp.route('/<venue_id>', methods=['GET'])
 def venue(venue_id):
-    url_prefix=venue_bp.name
-    print(url_prefix)
-
     # Venue info
     result = db.session.execute(
         'select * from scoop.venue '
@@ -41,15 +38,11 @@ def venue(venue_id):
         {'venue_id':venue_id})
     reviews = result.fetchall()
 
-    # Form
-    form = ReviewForm()
-
     return render_template(
         'venue.jinja2',
         venue=venue,
         review_aggregates=review_aggregates,
-        reviews=reviews,
-        form=form
+        reviews=reviews
     )
 
 @venue_bp.route('/review', methods=['POST'])
@@ -65,8 +58,7 @@ def review():
         'review': review,
         'rating': rating,
         'appuser_id': appuser_id,
-        'venue_id': venue_id,
-        
+        'venue_id': venue_id,  
     })
     db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))

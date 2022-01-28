@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from ..forms import ReviewForm
 from .. import db
 
 home_bp = Blueprint(
@@ -10,29 +9,9 @@ home_bp = Blueprint(
 
 @home_bp.route("/", methods=["GET"])
 def home():
-    result = db.session.execute('select * from category')
-    categories = result.fetchall()
     return render_template(
         "home.jinja2",
-        template = "home-template",
-        categories = categories
-    )
-
-@home_bp.route('/category/<category_id>', methods=['GET'])
-def venuesByCategory(category_id):
-     # Selected category's venues
-    result = db.session.execute(
-        'select * from scoop.venue '
-        + 'inner join scoop.venuecategory vc on vc.venue_id = venue.id '
-        + 'where vc.category_id = :category_id '
-        + 'order by venue.name desc',
-        {'category_id':category_id})
-
-    venues = result.fetchall()
-
-    return render_template(
-        'category.jinja2',
-        venues=venues,
+        template = "home-template"
     )
 
 @home_bp.route("/result")

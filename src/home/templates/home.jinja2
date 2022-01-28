@@ -1,19 +1,21 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
+    <link
+        rel="stylesheet"
+        href="/static/home.css"
+        type="text/css"
+    />
+
     <div class="container">
-        <h2 class="title">Scoop – Restaurant Finder</h2>
+        <h1 class="title">Scoop – Restaurant Finder</h1>
         <img src="/static/pexels-drinks.jpg"
             width="200"
             height="auto">
-        <form action="/result" method="GET">
+        <form action="/discover/search" method="GET">
             Search: <input type="text" name="query">
             <br>
             <input type="submit" value="Lähetä">
         </form>
-        <h3>Restaurants By Category</h3>
-        {% for category in categories %}
-            <a href="/category/{{ category.id }}">{{ category.name }}</a>
-        {% endfor %}
     </div>
 {% endblock %}

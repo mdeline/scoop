@@ -3,7 +3,7 @@
 {% block content %}
 
   <div class="container">
-  <h2>Discover New Restaurants</h2>
+  <h1>Query results</h1>
     {% for venue in venues %}
     <h3>{{ venue.name }} </h3>
     <ul id="venue.name">
@@ -17,7 +17,7 @@
       </li>
       <li>
         <span class="field-name">Address:</span>
-        <span class="field-value">{{ venue.street_address }}</span>
+        <span class="field-value">{{ venue.address }}</span>
       </li>
       <li>
         <span class="field-name">Postal Code:</span>
@@ -28,6 +28,7 @@
         <span class="field-value">{{ venue.city }}</span>
       </li>
     </ul>
+    <a href="/venue/{{ venue.id }}">See Reviews</a>
     {% endfor %}
   </div>
 
