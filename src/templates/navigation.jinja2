@@ -1,13 +1,25 @@
+<link
+  rel="stylesheet"
+  href="/static/nav.css"
+  type="text/css"
+/>
+
 <header>
-    <nav>
-     <a href="/">Home</a>
-     <a href="/discover">Discover</a>
+  <nav class='nav-container'>
+    <div id='container-left'>
+      <a href="/">Scoop</a>
+      <a href="/discover">Discover</a>
+    </div>
+    <div id='container-right'>
       {% if session.appuser_fullname %}
         <span>{{ session.appuser_fullname }}</span>
         <a href="/logout">Logout</a>
-      {% else %}
+        {% else %}
         <a href="/register">Sign Up</a>
         <a href="/login">Sign In</a>
       {% endif %}
+    </div>
    </nav>
 </header>
+
+
