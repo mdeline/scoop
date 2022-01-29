@@ -18,14 +18,15 @@ def discover_all():
 
 @discover_pb.route("/search", methods=['GET', 'POST'])
 def discover_query():
-    query = request.args["query"].lower()
+    query = request.args["query"]
+    query_cleaned = query.lower()
     sql =   ("select * from scoop.venue "
-            + "where lower(street_address) like :query "
-            + "or postal_code like :query "
-            + "or lower(city) like :query " 
-            + "or lower(neighbourhood) like :query"
+            + "where lower(street_address) like :query_cleaned "
+            + "or postal_code like :query_cleaned "
+            + "or lower(city) like :query_cleaned " 
+            + "or lower(neighbourhood) like :query_cleaned"
             )
-    result = db.session.execute(sql, {"query":"%"+query+"%"})
+    result = db.session.execute(sql, {"query_cleaned":"%"+query_cleaned+"%"})
     venues = result.fetchall()
     return render_template(
         "discover_results.jinja2", 
