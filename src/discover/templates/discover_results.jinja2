@@ -2,38 +2,45 @@
 
 {% block content %}
 
-  <div class="container">
-  <h1>Results for "{{ query }}"</h1>
-    {% for venue in venues %}
-    <h3>{{ venue.name }} </h3>
-    <ul id="venue.name">
-      <li>
-        <span class="field-name">Venue:</span>
-        <span class="field-value">{{ venue.name }}</span>
-      </li>
-      <li>
-        <span class="field-name">Description:</span>
-        <span class="field-value">{{ venue.description }}</span>
-      </li>
-      <li>
-        <span class="field-name">Address:</span>
-        <span class="field-value">{{ venue.street_address }}</span>
-      </li>
-      <li>
-        <span class="field-name">Postal Code:</span>
-        <span class="field-value">{{ venue.postal_code }}</span>
-      </li>
-      <li>
-        <span class="field-name">City:</span>
-        <span class="field-value">{{ venue.city }}</span>
-      </li>
-      <li>
-        <span class="field-name">Neighbourhood:</span>
-        <span class="field-value">{{ venue.neighbourhood }}</span>
-      </li>
-    </ul>
-    <a href="/venue/{{ venue.id }}">See Reviews</a>
-    {% endfor %}
+  <div class="discover-container">
+    {% if venues %}
+      <h1>Results for "{{ query }}"</h1>
+
+      {% for venue in venues %}
+      <h3>{{ venue.name }} </h3>
+      <ul id="venue.name">
+        <li>
+          <span class="field-name">Venue:</span>
+          <span class="field-value">{{ venue.name }}</span>
+        </li>
+        <li>
+          <span class="field-name">Description:</span>
+          <span class="field-value">{{ venue.description }}</span>
+        </li>
+        <li>
+          <span class="field-name">Address:</span>
+          <span class="field-value">{{ venue.street_address }}</span>
+        </li>
+        <li>
+          <span class="field-name">Postal Code:</span>
+          <span class="field-value">{{ venue.postal_code }}</span>
+        </li>
+        <li>
+          <span class="field-name">City:</span>
+          <span class="field-value">{{ venue.city }}</span>
+        </li>
+        <li>
+          <span class="field-name">Neighbourhood:</span>
+          <span class="field-value">{{ venue.neighbourhood }}</span>
+        </li>
+      </ul>
+      <a href="/venue/{{ venue.id }}">See Reviews</a>
+      {% endfor %}
+
+      {% else %}
+        <h1>Sorry, no results for "{{ query }}" :(</h1>
+        <p>Maybe try these next: ...</p>
+    {% endif %}
   </div>
 
 {% endblock %}
