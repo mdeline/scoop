@@ -1,6 +1,41 @@
-.home-container {
+#home-container {
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
+    padding-top: 16px;
+    padding-bottom: 192px;
+}
+
+#home-title {
+    margin-bottom: 20px;
+    padding: 0 10px 0 10px;
+    background-color: lightsalmon;
+}
+
+#home-form {
+    display:flex;
+    flex-direction:row;
+    height: 35px;
+    border:1px solid lightgray;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#home-query {
+    flex-grow:6;
+    border:none;
+}
+  
+#home-query:focus {
+    outline: none;
+}
+
+#home-submit {
+    background:black;
+    color:white;
+    border: none;
+    padding: 10px;
+    font-weight: 500;
 }

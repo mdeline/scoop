@@ -13,19 +13,3 @@ def home():
         "home.jinja2",
         template = "home-template"
     )
-
-@home_bp.route("/result")
-def result():
-    query = request.args["query"].lower()
-    sql =   ("select * from scoop.venue "
-            + "where lower(street_address) like :query "
-            + "or postal_code like :query "
-            + "or lower(city) like :query " 
-            + "or lower(neighbourhood) like :query"
-            )
-    result = db.session.execute(sql, {"query":"%"+query+"%"})
-    venues = result.fetchall()
-    return render_template(
-        "result.jinja2", 
-        venues=venues
-    )

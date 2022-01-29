@@ -29,5 +29,6 @@ def discover_query():
     venues = result.fetchall()
     return render_template(
         "discover_results.jinja2", 
-        venues=venues
+        venues=venues,
+        query=query
     )

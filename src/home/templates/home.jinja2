@@ -7,15 +7,12 @@
         type="text/css"
     />
 
-    <div class="home-container">
-        <h1 class="title">Scoop – Restaurant Finder</h1>
-        <img src="/static/pexels-drinks.jpg"
-            width="200"
-            height="auto">
-        <form action="/discover/search" method="GET">
-            Search: <input type="text" name="query">
-            <br>
-            <input type="submit" value="Lähetä">
+    <div id="home-container">
+        <h1 id="home-title">Meet your next favorite restaurant</h1>
+        <img id="home-img" src="/static/home-pineapple.jpg" width="300" height="auto">
+        <form id="home-form" action="/discover/search" method="GET">
+            <input id="home-query" type="text" name="query" placeholder="e.g. Kallio">
+            <button id="home-submit" type="submit">Search</button>
         </form>
     </div>
 {% endblock %}
