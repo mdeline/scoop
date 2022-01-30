@@ -22,12 +22,16 @@ helsinki_places_json = requests.get('http://open-api.myhelsinki.fi/v2/places/').
 data = helsinki_places_json["data"]
 
 for place in data:
-    insert_query = "insert into scoop.venue(id, name, info_url, description, street_address, postal_code, city, neighbourhood) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_query = "insert into scoop.venue(id, name, description, info_url, img_url, street_address, postal_code, city, neighbourhood) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     if place["name"]["fi"] == None:
         continue
 
-    is_restaurant_or_cafe = False
+    if 'images' in place["description"] and len(place["description"]["images"]) > 0:
+        img_url = place["description"]["images"][0]["url"]
+    else:
+        img_url = None
 
+    is_restaurant_or_cafe = False
     for tag in place["tags"]:
         tag_name = tag["name"].lower()
         if tag_name == "restaurants" or tag_name == "cafes" or tag_name == "islandrestaurant" or tag_name == "restaurant" or tag_name == "cafe" or tag_name == "cafesummer" or tag_name == "restaurantsummer":
@@ -42,8 +46,9 @@ for place in data:
         (
             place["id"],
             place["name"]["fi"],
-            place["info_url"],
             place["description"]["intro"],
+            place["info_url"],
+            img_url,
             place["location"]["address"]["street_address"],
             place["location"]["address"]["postal_code"],
             place["location"]["address"]["locality"],
@@ -53,16 +58,24 @@ for place in data:
     conn.commit()
 conn.close()
 
-"""helsinki_places_json = requests.get('http://open-api.myhelsinki.fi/v2/places/').json()
+"""
+
+helsinki_places_json = requests.get('http://open-api.myhelsinki.fi/v2/places/').json()
 data = helsinki_places_json["data"]
 for place in data:
     print(place["name"]["en"])
     print(place["info_url"])
     print(place["description"]["intro"])
+
+    if 'images' in place["description"] and len(place["description"]["images"]) > 0:
+        print(place["description"]["images"][0]["url"])
+        print("TEST")
+
     print(place["location"]["address"]["street_address"])
     print(place["location"]["address"]["postal_code"])
     print(place["location"]["address"]["locality"])
     print(place["location"]["address"]["neighbourhood"])
 
 for data in helsinki_places_json:
-    print(data)"""
+    print(data)
+"""

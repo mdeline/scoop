@@ -101,6 +101,7 @@ create table scoop.venue (
     name text not null,
     description text null,
     info_url text null,
+    img_url text null,
     street_address varchar(50) not null,
     postal_code varchar(5) not null,
     city varchar(50) not null,
