@@ -1,0 +1,21 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+    <link
+        rel="stylesheet"
+        href="/discover/static/discover.css"
+        type="text/css"
+    />
+
+    <div id="discover-container">
+        <h1 id="discover-title">Discover new restaurants and cafes</h1>
+        <div id="discover-neighbourhoods-parent">
+            {% for neighbourhood in neighbourhoods %}
+            <div id="discover-neighbourhoods-child">
+                <p>{{ neighbourhood.name }}</p>
+                <p>{{  neighbourhood.venues_count  }} venues</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

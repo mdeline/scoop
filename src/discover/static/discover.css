@@ -1,0 +1,21 @@
+#discover-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 192px;
+}
+
+#discover-neighbourhoods-parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#discover-neighbourhoods-child {
+    flex: 1 0 21%; /* explanation below */
+    margin: 50px;
+    height: 100px;
+    background-color: slateblue;
+    padding: 50px;
+}

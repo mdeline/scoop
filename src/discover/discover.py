@@ -9,11 +9,15 @@ discover_pb = Blueprint(
 
 @discover_pb.route('/', methods=['GET'])
 def discover_all():
-    result = db.session.execute('select * from venue')
-    venues = result.fetchall()
+    neighbourhoods = db.session.execute(
+        'select neighbourhood as name, count(*) as venues_count '
+        + 'from venue group by neighbourhood '
+        + 'order by venues_count desc'
+    ).fetchall()
+
     return render_template(
-        'discover_all.jinja2',
-        venues=venues
+        'discover.jinja2',
+        neighbourhoods=neighbourhoods
     )
 
 @discover_pb.route("/search", methods=['GET', 'POST'])
