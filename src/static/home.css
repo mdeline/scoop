@@ -10,7 +10,8 @@
 #home-title {
     margin-bottom: 20px;
     padding: 0 10px 0 10px;
-    background-color: lightsalmon;
+    background: linear-gradient(yellow, yellow) left bottom repeat-x;
+    background-size: 12px 12px;
 }
 
 #home-form {
@@ -26,6 +27,7 @@
 #home-query {
     flex-grow:6;
     border:none;
+    font-family: 'Courier New', Courier, monospace;
 }
   
 #home-query:focus {
@@ -38,4 +40,5 @@
     border: none;
     padding: 10px;
     font-weight: 500;
+    text-transform: uppercase;
 }
