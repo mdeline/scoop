@@ -1,9 +1,12 @@
-a {
-    color:brown;
-}
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.nav-container a:link, .nav-container a:visited {
+    text-decoration: none;
+    color: salmon;
+    font-weight: 500;
 }
