@@ -19,6 +19,11 @@
     border-style: dotted dashed solid double;
 }
 
+#discover-neighbourhoods-child a:link, #discover-neighbourhoods-child a:visited {
+    text-decoration: none;
+    color: black;
+}
+
 #discover-neighbourhoods-child-upper {
     flex-grow: 1;
     flex-basis: calc(50% - 20px);

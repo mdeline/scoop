@@ -11,6 +11,7 @@
         <h1 id="discover-title">Discover new restaurants and cafes</h1>
         <div id="discover-neighbourhoods-parent">
             {% for neighbourhood in neighbourhoods %}
+            <a href="/discover/search?query={{ neighbourhood.name }}">
             <div id="discover-neighbourhoods-child">
                 <div id="discover-neighbourhoods-child-upper">
                     <img id="home-img" src="{{ neighbourhood.img_url }}" width="300" height="auto">
@@ -23,6 +24,7 @@
                         <p>{{ neighbourhood.venues_count }} venue</p>
                     {% endif%}
                 </div>
+                </a>
 
             </div>
             {% endfor %}
