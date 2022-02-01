@@ -13,7 +13,11 @@
             {% for neighbourhood in neighbourhoods %}
             <div id="discover-neighbourhoods-child">
                 <p>{{ neighbourhood.name }}</p>
-                <p>{{  neighbourhood.venues_count  }} venues</p>
+                {% if neighbourhood.venues_count > 1 %}
+                    <p>{{ neighbourhood.venues_count }} venues</p>
+                {% else %}
+                    <p>{{ neighbourhood.venues_count }} venue</p>
+                {% endif%}
             </div>
             {% endfor %}
         </div>
