@@ -10,9 +10,22 @@ discover_pb = Blueprint(
 @discover_pb.route('/', methods=['GET'])
 def discover_all():
     neighbourhoods = db.session.execute(
-        'select neighbourhood as name, count(*) as venues_count '
-        + 'from venue group by neighbourhood '
-        + 'order by venues_count desc'
+        'with neighbourhood_images as ('
+        + 'select neighbourhood, img_url, '
+        + 'row_number() over ('
+        + 'partition by neighbourhood order by random() '
+        + ') as row_num '
+        + 'from venue where neighbourhood is not null '
+        + 'and img_url is not null), '
+        + 'neighbourhood_venues as ('
+        + 'select neighbourhood, count(*) as venues_count '
+        + 'from venue '
+        + 'group by neighbourhood) '
+        + 'select i.neighbourhood as name, i.img_url, v.venues_count '
+        + 'from neighbourhood_images i '
+        + 'inner join neighbourhood_venues v on v.neighbourhood = i.neighbourhood '
+        + 'where i.row_num = 1 '
+        + 'order by v.venues_count desc'
     ).fetchall()
 
     return render_template(

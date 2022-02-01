@@ -9,15 +9,22 @@
 
     <div id="discover-container">
         <h1 id="discover-title">Discover new restaurants and cafes</h1>
+        <img id="home-img" src="https://tprimages.blob.core.windows.net/public/3446/a77e273c-7925-455e-89a2-50e5b24ee815.jpg" width="300" height="auto">
         <div id="discover-neighbourhoods-parent">
             {% for neighbourhood in neighbourhoods %}
             <div id="discover-neighbourhoods-child">
-                <p>{{ neighbourhood.name }}</p>
-                {% if neighbourhood.venues_count > 1 %}
-                    <p>{{ neighbourhood.venues_count }} venues</p>
-                {% else %}
-                    <p>{{ neighbourhood.venues_count }} venue</p>
-                {% endif%}
+                <div id="discover-neighbourhoods-child-upper">
+                    <img id="home-img" src="{{ neighbourhood.img_url }}" width="300" height="auto">
+                </div>
+                <div id="discover-neighbourhoods-child-lower">
+                    <p>{{ neighbourhood.name }}</p>
+                    {% if neighbourhood.venues_count > 1 %}
+                        <p>{{ neighbourhood.venues_count }} venues</p>
+                    {% else %}
+                        <p>{{ neighbourhood.venues_count }} venue</p>
+                    {% endif%}
+                </div>
+
             </div>
             {% endfor %}
         </div>
