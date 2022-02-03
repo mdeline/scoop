@@ -1,12 +1,13 @@
-
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 150px;
+    margin-right: 150px
 }
 
 .nav-container a:link, .nav-container a:visited {
     text-decoration: none;
-    color: salmon;
     font-weight: 500;
+    font-size: large;
 }

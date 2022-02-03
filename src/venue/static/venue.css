@@ -1,9 +1,41 @@
-h2 {
-    text-align: left;
+#venue-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 192px;
+	margin: 15px 150px 0px 150px;
+	max-width: 1000px;
 }
 
-td {
-	padding: 0.3em;
+#venue-info h1 {
+	margin: 0;
+}
+
+#venue-info-body {
+	display: flex;
+    flex-flow: row;
+
+}
+
+#venue-info-body-left > div {
+	padding-bottom: 10px;
+
+}
+
+#venue-img {
+	width: 450px;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+#venue-info-body-left {
+	
+}
+
+#venue-info-body > div {
+	margin: 20px;
 }
 
 #review_field {

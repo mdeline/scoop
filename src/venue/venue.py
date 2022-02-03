@@ -20,8 +20,9 @@ def venue(venue_id):
 
     # Review count & review average
     result = db.session.execute(
-        'select avg(stars)::numeric(3,2) as review_avg, '
-        + 'count(stars) as review_count '
+        'select '
+        + 'coalesce(avg(stars)::numeric(3,2), 0) as review_avg, '
+        + 'coalesce(count(review), 0) as review_count '
         + 'from scoop.review '
         + 'where venue_id = :venue_id',
         {'venue_id': venue_id}
