@@ -5,18 +5,18 @@
 />
 
 <header>
-  <nav class='nav-container'>
-    <div id='nav-left'>
-      <a href="/">Scoop</a>
-      <a href="/discover">Discover</a>
+  <nav class="nav-container">
+    <div class="nav-left">
+      <a href="/"><button class="nav-logo">Scoop</button></a>
+      <a href="/discover"><button class="nav-discover">DISCOVER</button></a>
     </div>
-    <div id='nav-right'>
+    <div class="nav-right">
       {% if session.appuser_fullname %}
         <span>{{ session.appuser_fullname }}</span>
-        <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/register">Sign Up</a>
-        <a href="/login">Sign In</a>
+        <a href="/logout"><button class="nav-logout">Logout</button></a>
+      {% else %}
+        <a href="/login"><button class="nav-login">LOGIN</button></a>
+        <a href="/register"><button class="nav-signup">SIGNUP</button></a>
       {% endif %}
     </div>
    </nav>

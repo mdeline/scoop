@@ -40,9 +40,9 @@
         </div>
         <div id="venue-info-body-right">
           {% if venue.img_url %}
-            <img id="venue-img" src="{{ venue.img_url }}">
+            <img id="venue-img" src="{{ venue.img_url }}" alt="Picture of the venue.">
           {% else %}
-            <img id="venue-img" src="/static/img_unavailable.png">
+            <img id="venue-img" src="/static/img_unavailable.png" alt="No venue image available.">
           {% endif %}
 
         </div>
