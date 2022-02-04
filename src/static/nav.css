@@ -1,6 +1,7 @@
 hr {
     padding: 0px;
-    margin: 0px;    
+    margin: 0px;
+    border: 2px solid darkslateblue;
 }
 
 .nav-container {
@@ -39,6 +40,11 @@ hr {
     background-color: white;
     color: darkslateblue;
     border: none;
+}
+
+.nav-discover {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .nav-login:hover, .nav-discover:hover, .nav-logout:hover {
