@@ -10,33 +10,45 @@ hr {
     padding-right: 32px;
     padding-left: 32px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    height: 5.14286rem;
+    align-items: center;
 }
 
-.nav-container a:link, .nav-container a:visited {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: large;
+.nav-left, .nav-right {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
 }
 
-.nav-login, .nav-logout, .nav-signup, .nav-logo, .nav-discover {
+.nav-logo {
+    width: 150px;
+    display: block;
+}
+
+.nav-button {
     border-radius: 5px;
     padding: 10px 15px 10px 15px;
     margin-left: 5px;
     margin-right: 5px;
     font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
-.nav-login, .nav-discover {
+.nav-login, .nav-discover, .nav-logout {
     background-color: white;
     color: darkslateblue;
     border: none;
 }
 
-.nav-login:hover, .nav-discover:hover {
-    background-color: lightgray;
+.nav-login:hover, .nav-discover:hover, .nav-logout:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.nav-user {
+    background-color: white;
+    color: darkslateblue;
+    border: none;
 }
 
 .nav-signup {
@@ -48,4 +60,5 @@ hr {
 .nav-signup:hover {
     background-color: darkslateblue;
     color: white;
+    
 }

@@ -6,18 +6,20 @@
 
 <header>
   <nav class="nav-container">
+
     <div class="nav-left">
-      <a href="/"><button class="nav-logo">Scoop</button></a>
-      <a href="/discover"><button class="nav-discover">DISCOVER</button></a>
+      <a class="nav-item" href="/"><img class="nav-logo" src="/static/scoop_logo.png"/></a>
+      <a class="nav-item" href="/discover"><button class="nav-button nav-discover">Discover</button></a>
     </div>
+
     <div class="nav-right">
-      {% if session.appuser_fullname %}
-        <span>{{ session.appuser_fullname }}</span>
-        <a href="/logout"><button class="nav-logout">Logout</button></a>
-      {% else %}
-        <a href="/login"><button class="nav-login">LOGIN</button></a>
-        <a href="/register"><button class="nav-signup">SIGNUP</button></a>
-      {% endif %}
+        {% if session.appuser_fullname %}
+          <a class="nav-item" href="/"><button class="nav-button nav-user">{{ session.appuser_fullname }}</button></a>
+          <a class="nav-item" href="/logout"><button class="nav-button nav-logout">Logout</button></a>
+        {% else %}
+          <a class ="nav-item" href="/login"><button class="nav-button nav-login">Login</button></a>
+          <a class="nav-item" href="/register"><button class="nav-button nav-signup">Signup</button></a>
+        {% endif %}
     </div>
    </nav>
    <hr>
