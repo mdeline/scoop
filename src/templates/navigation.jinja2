@@ -3,22 +3,19 @@
   href="/static/nav.css"
   type="text/css"
 />
-
 <header>
   <nav class="nav-container">
-
     <div class="nav-left">
       <a class="nav-item" href="/"><img class="nav-logo" src="/static/scoop_logo.png"/></a>
-      <a class="nav-item" href="/discover"><button class="nav-button nav-discover">Discover</button></a>
+      <a class="nav-item" href="{{ url_for('discover_pb.discover_all') }}"><button class="nav-button nav-discover">Discover</button></a>
     </div>
-
     <div class="nav-right">
         {% if session.appuser_fullname %}
           <a class="nav-item" href="/"><button class="nav-button nav-user">{{ session.appuser_fullname }}</button></a>
-          <a class="nav-item" href="/auth/logout"><button class="nav-button nav-logout">Logout</button></a>
+          <a class="nav-item" href="{{ url_for('auth_bp.logout') }}"><button class="nav-button nav-logout">Logout</button></a>
         {% else %}
-          <a class ="nav-item" href="/auth/login"><button class="nav-button nav-login">Login</button></a>
-          <a class="nav-item" href="/auth/register"><button class="nav-button nav-signup">Signup</button></a>
+          <a class ="nav-item" href="{{ url_for('auth_bp.login') }}"><button class="nav-button nav-login">Login</button></a>
+          <a class="nav-item" href="{{ url_for('auth_bp.register') }}"><button class="nav-button nav-signup">Signup</button></a>
         {% endif %}
     </div>
    </nav>
