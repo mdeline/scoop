@@ -43,8 +43,7 @@ class LoginForm(FlaskForm):
             DataRequired()
         ]
     )
-    submit = SubmitField('Log In')
-
+    submit = SubmitField('Login')
 
 class ReviewForm(FlaskForm):
     review = StringField(

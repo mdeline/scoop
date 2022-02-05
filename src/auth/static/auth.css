@@ -1,3 +1,92 @@
+
 h1 {
+    align-self: center;
     color: orangered;
+    margin: 0;
+}
+
+.auth-container {
+    display: flex;
+    background-color: darkslateblue;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+}
+
+.auth-form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px 40px 50px 40px;
+    box-shadow: 5px 5px 5px rgb(54, 46, 107);
+}
+
+.auth-item {
+    border-radius: 5px;
+    padding: 0 0 20px 0;
+    font-weight: bold;
+    border: none;
+}
+
+.errors {
+    font-weight: lighter;
+    color: red;
+    list-style: none;    
+    font-size: small;
+    margin: 0;
+    padding: 5px 0 0 0;
+}
+
+.input-container {
+    display: flex;
+    flex-flow: column nowrap;
+    font-weight: lighter;
+    color: gray;
+}
+
+#email, #password {
+    padding: 10px 7px 10px 7px;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+}
+
+#email:hover, #password:hover {
+    border: 2px solid darkslateblue;
+}
+
+#submit {
+    border-radius: 5px;
+    padding: 10px;
+    width:100%;
+    display:block;
+    background-color: darkslateblue;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#submit:hover {
+    background-color: rgb(54, 46, 107);
+    color: white;
+    cursor: pointer;
+}
+
+.register {
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    color:orangered
 }

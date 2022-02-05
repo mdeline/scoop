@@ -17,7 +17,7 @@ def register():
         #role = db.session.execute('select id from scoop.role where name = 'user'')
         hash_value = generate_password_hash(form.password.data)
         sql = "insert into scoop.appuser (fullname, email, password, role_id) VALUES (:fullname, :email, :password, 1)"
-        db.session.execute(sql, {"fullname":form.name.data, "email":form.email.data, "password":hash_value})
+        db.session.execute(sql, {"fullname":form.name.data, "email":form.email.data.lower(), "password":hash_value})
         db.session.commit()
         return redirect(url_for("auth_bp.success"))
     return render_template(
@@ -39,9 +39,9 @@ def login():
     failed_login = ''
     if form.validate_on_submit():
         sql = 'select * from scoop.appuser where email = :email'
-        appuser = db.session.execute(sql, {'email': form.email.data}).first()
-        hashed_password = appuser.password
+        appuser = db.session.execute(sql, {'email': form.email.data.lower()}).first()
         if appuser and check_password_hash(hashed_password, form.password.data):
+            hashed_password = appuser.password
             session["appuser_fullname"] = appuser.fullname
             session["appuser_id"] = appuser.id
             return redirect(url_for("auth_bp.success"))

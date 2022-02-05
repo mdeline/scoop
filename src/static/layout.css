@@ -3,3 +3,8 @@ body {
     padding: 0;
     min-width: 500px;
 }
+
+html, body {
+    height: calc(100% - 45px);
+
+}
