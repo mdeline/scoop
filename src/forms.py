@@ -10,24 +10,33 @@ from wtforms import (
 from wtforms.validators import URL, DataRequired, Email, EqualTo, Length
 
 class RegisterForm(FlaskForm):
-    name = StringField(
+    fullname = StringField(
         'Name',
-        [DataRequired()]
+        validators=[
+            DataRequired()
+        ]
     )
     email = StringField(
         'Email',
-        [Email(message=('Email format is invalid.')), DataRequired()]
+        validators=[
+            DataRequired(),
+            Email(message='Email format is invalid.')
+        ]
     )
     password = PasswordField(
         "Password",
-        [DataRequired(message="Please enter a password.")],
+        validators=[
+            DataRequired()
+        ]
     )
     confirmPassword = PasswordField(
         "Repeat Password",
-        [EqualTo("password", message="Passwords must match.")]
+        validators=[
+            EqualTo('password', message="Passwords must match")
+        ]
     )
     # recaptcha = RecaptchaField() todo: do later
-    submit = SubmitField("Submit")
+    submit = SubmitField('Submit')
 
 class LoginForm(FlaskForm):
     email = StringField(
@@ -43,7 +52,7 @@ class LoginForm(FlaskForm):
             DataRequired()
         ]
     )
-    submit = SubmitField('Login')
+    submit = SubmitField('Submit')
 
 class ReviewForm(FlaskForm):
     review = StringField(

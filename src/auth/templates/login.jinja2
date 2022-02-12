@@ -9,34 +9,37 @@
 
 <div class="auth-container">
   <div class="auth-form form-wrapper">
-    <h1 class="auth-item">Login</h1>
+    <h1 class="auth-item">Login to Scoop</h1>
     <form method="POST" action="/auth/login">
       {{ form.csrf_token }}
-      <fieldset class="auth-item email">
-        <div class="input-container">Email{{ form.email }}</div>
+      <fieldset class="auth-item">
+        <div class="input-container">{{ form.email.label }}{{ form.email }}</div>
         {% if form.email.errors %}
           <ul class="errors">
             {% for error in form.email.errors %}
-              <li>{{ error }}</li>{% endfor %}
+              <li>{{ error }}</li>
+            {% endfor %}
           </ul>
         {% endif %}
       </fieldset>
-      <fieldset class="auth-item password">
-        <div class="input-container">Password{{ form.password }}</div>
+      <fieldset class="auth-item">
+        <div class="input-container">{{ form.password.label }}{{ form.password }}</div>
         {% if failed_login %}
           <div class="errors">{{ failed_login }}</div>
         {% endif %}
       </fieldset>
       
-      <div class="auth-item submit">
+      <div class="auth-item">
         {{ form.submit }}
       </div>
-      <div class="auth-item register">
+      
+    </form>
+    <div class="auth-item register">
         <span>Don't have an account?</span>
         <a href="{{ url_for('auth_bp.register') }}">Register.</a>
-      </div>
-    </form>
+    </div>
   </div>
+
 </div>
 
 {% endblock %}

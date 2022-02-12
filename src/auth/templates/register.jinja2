@@ -1,33 +1,34 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
+
   <link
     rel="stylesheet"
-    href="/static/auth.css"
+    href="/auth/static/auth.css"
     type="text/css"
   />
-    <div class="form-wrapper">
-        <h2 class="title">Register</h2>
-  
+
+  <div class="auth-container">
+    <div class="auth-form form-wrapper">
+        <h1 class="auth-item title">Register to Scoop</h1>
         <form method="POST" action="/auth/register">
-
-            {{ form.csrf_token }}
-
-            <!-- First Name -->
-            <fieldset class="form-field">{{ form.name.label }} {{ form.name }}
-            {% if form.name.errors %}
-              <ul class="errors">
-                {% for error in form.name.errors %}
-                  <li class="error">
+            {{form.csrf_token}}
+            <fieldset class="auth-item name">
+              <div class="input-container">{{ form.fullname.label }}{{ form.fullname }}</div>
+              {% if form.fullname.errors %}
+                <ul class="errors">
+                  {% for error in form.fullname.errors %}
+                    <li class="error">
                       <i class="fas fa-exclamation"></i> <span class="error-message">{{ error }}</span>
-                  </li>
+                    </li>
                 {% endfor %}
               </ul>
             {% endif %}
             </fieldset>
 
           <!-- Email -->
-          <fieldset class="form-field">{{ form.email.label }} {{ form.email }}
+          <fieldset class="auth-item email">
+            <div class="input-container">{{ form.email.label }}{{ form.email }}</div>
             {% if form.email.errors %}
               <ul class="errors">
                 {% for error in form.email.errors %}
@@ -40,7 +41,8 @@
           </fieldset>
 
           <!-- Password -->
-          <fieldset class="form-field">{{ form.password.label }} {{ form.password }}
+          <fieldset class="auth-item password">
+            <div class="input-container">{{ form.password.label }}{{ form.password }}</div>
             {% if form.password.errors %}
               <ul class="errors">
                 {% for error in form.password.errors %}
@@ -53,7 +55,8 @@
           </fieldset>
 
           <!-- Confirm Password -->
-          <fieldset class="form-field">{{ form.confirmPassword.label }} {{ form.confirmPassword }}
+          <fieldset class="auth-item password">
+            <div class="input-container">{{ form.confirmPassword.label }} {{ form.confirmPassword }}</div>
             {% if form.confirmPassword.errors %}
               <ul class="errors">
                 {% for error in form.confirmPassword.errors %}
@@ -66,9 +69,14 @@
           </fieldset>
   
           <!-- do this later {{ form.recaptcha }} -->
-          {{ form.submit }}
-  
+          <div class="auth-item">
+            {{ form.submit }}
+          </div>
+          {% if failed_registration %}
+            <div class="errors">{{ failed_registration }}</div>
+          {% endif %}
         </form>
       </div>
+    </div>
 
 {% endblock %}

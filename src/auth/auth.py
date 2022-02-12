@@ -13,24 +13,25 @@ auth_bp = Blueprint(
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
+    failed_registration = ''
+    validate = form.validate_on_submit()
+    email_exists_apu = ''
     if form.validate_on_submit():
-        #role = db.session.execute('select id from scoop.role where name = 'user'')
-        hash_value = generate_password_hash(form.password.data)
-        sql = "insert into scoop.appuser (fullname, email, password, role_id) VALUES (:fullname, :email, :password, 1)"
-        db.session.execute(sql, {"fullname":form.name.data, "email":form.email.data.lower(), "password":hash_value})
-        db.session.commit()
-        return redirect(url_for("auth_bp.success"))
+        sql = "select * from appuser where email=:email"
+        email_exists = db.session.execute(sql, {'email':form.email.data.lower()}).first()
+        if email_exists is None:
+            hash_value = generate_password_hash(form.password.data)
+            sql = "insert into appuser (fullname, email, password, role_id) VALUES (:fullname, :email, :password, 1)"
+            db.session.execute(sql, {"fullname":form.fullname.data, "email":form.email.data.lower(), "password":hash_value})
+            db.session.commit()
+            return redirect(url_for("auth_bp.success"))
+        failed_registration = 'Email already exists.'
     return render_template(
         "register.jinja2",
         form=form,
-        template="register-template"
-    )
-
-@auth_bp.route('/success', methods=['GET', 'POST'])
-def success():
-    return render_template(
-        "success.jinja2",
-        template="success-template"
+        title="Register",
+        template="register-template",
+        failed_registration=failed_registration
     )
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -40,18 +41,26 @@ def login():
     if form.validate_on_submit():
         sql = 'select * from scoop.appuser where email = :email'
         appuser = db.session.execute(sql, {'email': form.email.data.lower()}).first()
-        if appuser and check_password_hash(hashed_password, form.password.data):
+        if appuser:
             hashed_password = appuser.password
-            session["appuser_fullname"] = appuser.fullname
-            session["appuser_id"] = appuser.id
-            return redirect(url_for("auth_bp.success"))
+            if check_password_hash(hashed_password, form.password.data):
+                session["appuser_fullname"] = appuser.fullname
+                session["appuser_id"] = appuser.id
+                return redirect(url_for("auth_bp.success"))
         failed_login = 'Invalid email or password.'
     return render_template(
         'login.jinja2',
         form=form,
-        title='Log in.',
-        template='login-page',
+        title='Login.',
+        template='login-template',
         failed_login = failed_login
+    )
+
+@auth_bp.route('/success', methods=['GET', 'POST'])
+def success():
+    return render_template(
+        "success.jinja2",
+        template="success-template"
     )
 
 @auth_bp.route("/logout")

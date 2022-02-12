@@ -1,8 +1,8 @@
-
 h1 {
     align-self: center;
     color: orangered;
     margin: 0;
+    font-weight: normal;
 }
 
 .auth-container {
@@ -12,23 +12,23 @@ h1 {
     padding: 0;
     margin: 0;
     align-items: center;
-    
-
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-
 }
 
 .auth-form {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-
+    display: block;
+    min-width: 300px;
+    max-width: 675px;
     background-color: white;
     border-radius: 10px;
     padding: 40px 40px 50px 40px;
     box-shadow: 5px 5px 5px rgb(54, 46, 107);
+}
+
+.register {
+    background-color: white;
 }
 
 .auth-item {
@@ -49,18 +49,20 @@ h1 {
 
 .input-container {
     display: flex;
+    width: 100%;
     flex-flow: column nowrap;
     font-weight: lighter;
     color: gray;
 }
 
-#email, #password {
+/* FlaskForm's ids*/
+#email, #password, #fullname, #confirmPassword {
     padding: 10px 7px 10px 7px;
     border-radius: 5px;
     border: 2px solid lightgray;
 }
 
-#email:hover, #password:hover {
+#email:hover, #password:hover, #fullname:hover, #confirmPassword:hover {
     border: 2px solid darkslateblue;
 }
 
@@ -88,5 +90,4 @@ h1 {
 
 a {
     text-decoration: none;
-    color:orangered
 }
