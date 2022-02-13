@@ -1,4 +1,4 @@
-#discover-container {
+.discover-container {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -7,24 +7,59 @@
     padding-bottom: 192px;
 }
 
-#discover-neighbourhoods-parent {
+.discover-content-area {
+    width: 720px;
+    margin-bottom: 50px;
+}
+
+.result-separator > hr {
+    border: 1px solid gray;
+}
+
+.result-separator {
+    padding-top: 10px;
+}
+
+.discover-venue-info {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.info-body {
+    display: flex;
+    flex-flow: row;
+}
+
+.info-left > div {
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
+.venue-img {
+	width: 300px;
+	height: 220px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.discover-neighbourhoods-parent {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 15px;
 }
 
-#discover-neighbourhoods-child {
+.discover-neighbourhoods-child {
     margin: 25px;
     border-style: dotted dashed solid double;
 }
 
-#discover-neighbourhoods-child a:link, #discover-neighbourhoods-child a:visited {
+.discover-neighbourhoods-child a:link, .discover-neighbourhoods-child a:visited {
     text-decoration: none;
     color: black;
 }
 
-#discover-neighbourhoods-child-upper {
+.discover-neighbourhoods-child-upper {
     flex-grow: 1;
     flex-basis: calc(50% - 20px);
     margin: 10px;
@@ -32,13 +67,13 @@
     border-style: dotted dashed solid double;
 }
 
-#discover-neighbourhoods-child-upper img {
+.discover-neighbourhoods-child-upper img {
     display: block;
     max-width: auto;
     max-height: 200px;
 }
 
-#discover-neighbourhoods-child-lower {
+.discover-neighbourhoods-child-lower {
     flex-grow: 1;
     flex-basis: calc(50% - 22px);    /*  22px = 2*10px margin + 2*1px border  */
     margin: 10px;

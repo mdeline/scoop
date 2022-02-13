@@ -7,14 +7,14 @@
         type="text/css"
     />
 
-    <div id="discover-container">
-        <h1 id="discover-title">Discover new restaurants and cafes</h1>
-        <div id="discover-neighbourhoods-parent">
+    <div class="discover-container">
+        <h1 class="discover-title">Discover new restaurants and cafes</h1>
+        <div class="discover-neighbourhoods-parent">
             {% for neighbourhood in neighbourhoods %}
             <a href="/discover/neighbourhood?query={{ neighbourhood.name }}">
-            <div id="discover-neighbourhoods-child">
-                <div id="discover-neighbourhoods-child-upper">
-                    <img id="home-img" src="{{ neighbourhood.img_url }}" width="300" height="auto">
+            <div class="discover-neighbourhoods-child">
+                <div class="discover-neighbourhoods-child-upper">
+                    <img class="home-img" src="{{ neighbourhood.img_url }}" width="300" height="auto">
                 </div>
                 <div id="discover-neighbourhoods-child-lower">
                     <p>{{ neighbourhood.name }}</p>

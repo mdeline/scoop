@@ -4,48 +4,44 @@
   <link
       rel="stylesheet"
       href="/discover/static/discover.css"
-      type="text/css"
   />
 
   <div class="discover-container">
-    {% if venues %}
+    <div class="discover-content-area">
+      {% if venues %}
       <h1>{{ venue_aggregates.count }} results for "{{ query }}"</h1>
 
       {% for venue in venues %}
-      <h3>{{ venue.name }} </h3>
-      <ul id="venue.name">
-        <li>
-          <span class="field-name">Venue:</span>
-          <span class="field-value">{{ venue.name }}</span>
-        </li>
-        <li>
-          <span class="field-name">Description:</span>
-          <span class="field-value">{{ venue.description }}</span>
-        </li>
-        <li>
-          <span class="field-name">Address:</span>
-          <span class="field-value">{{ venue.street_address }}</span>
-        </li>
-        <li>
-          <span class="field-name">Postal Code:</span>
-          <span class="field-value">{{ venue.postal_code }}</span>
-        </li>
-        <li>
-          <span class="field-name">City:</span>
-          <span class="field-value">{{ venue.city }}</span>
-        </li>
-        <li>
-          <span class="field-name">Neighbourhood:</span>
-          <span class="field-value">{{ venue.neighbourhood }}</span>
-        </li>
-      </ul>
-      <a href="/venue/{{ venue.id }}">See Reviews</a>
+      <div class="discover-venue-info">
+        <div class="venue-title"><h3>{{ venue.name }}</h3></div>
+        <div class="info-body">
+          <div class="info-left">
+            <div><span>{{ venue.description }}</span></div>
+            <div class="venue-address">
+              <span>{{ venue.street_address }},</span>
+              <span>{{ venue.postal_code }}</span>
+              <span>{{ venue.city }}</span>
+            </div>
+          </div>
+          <div class="info-right">
+            {% if venue.img_url %}
+            <img class="venue-img" src="{{ venue.img_url }}" alt="Picture of the venue.">
+            {% else %}
+            <img class="venue-img" src="/static/img_unavailable.png" alt="No venue image available.">
+            {% endif %}
+          </div>
+          
+        </div>
+        <div class="venue-link"><a href="/venue/{{ venue.id }}">See Reviews</a></div>
+      </div>
+      <div class="result-separator"><hr></div>
       {% endfor %}
 
       {% else %}
-        <h1>Sorry, no results for "{{ query }}" :(</h1>
-        <p>Maybe try these next: ...</p>
-    {% endif %}
+      <h1>Sorry, no results for "{{ query }}" :(</h1>
+      <p>Maybe try these next: ...</p>
+      {% endif %}
+    </div>
   </div>
 
 {% endblock %}
