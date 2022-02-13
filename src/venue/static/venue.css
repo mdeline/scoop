@@ -1,43 +1,79 @@
-#venue-container {
-    display: flex;
+.venue-container {
+	display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    align-items: center;
     padding-top: 16px;
     padding-bottom: 192px;
-	margin: 15px 150px 0px 150px;
-	max-width: 900px;
 }
 
-#venue-info h1 {
-	margin: 0;
+.venue-content-area {
+	width: 900px;
+    margin-bottom: 50px;
 }
 
-#venue-info-body {
+.venue-info {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.venue-info-body {
 	display: flex;
     flex-flow: row;
+    justify-content: space-between;
+	padding: 10px;
 }
 
-#venue-info-body-left > div {
+.venue-info-body-left > div {
 	padding-bottom: 10px;
+    padding-right: 20px;
 }
 
-#venue-img {
+h1, h2, h3 {
+	border-bottom: 2px solid darkslateblue;
+}
+
+.venue-img {
 	width: 400px;
 	height: 300px;
 	object-fit: cover;
 	border-radius: 10px;
 }
 
-#venue-info-body-left {
-	
+.individual-review {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
 }
 
-#venue-info-body-aggregates {
+.review-left {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.review-section {
+	padding: 10px;
+}
+
+.profile-img {
+	width: 80px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 10px;
+
+}
+
+.venue-info-aggregates {
 	font-style: italic;
 }
 
-#venue-info-body > div {
-	margin: 20px;
+.review-form-area {
+	display: flex;
+}
+
+.review-form {
+	display: flex;
+	flex-flow: column nowrap;
 }
 
 #review_field {
@@ -84,4 +120,20 @@
 .rate-area > input:checked ~ label:hover ~ label,
 .rate-area > label:hover ~ input:checked ~ label {
 	color: orangered;
+}
+
+#review-submit {
+	border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+	border: none;
+}
+
+#review-submit:hover {
+    background-color: darkslateblue;
+	color: white;
 }

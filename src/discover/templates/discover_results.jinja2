@@ -9,8 +9,7 @@
   <div class="discover-container">
     <div class="discover-content-area">
       {% if venues %}
-      <h1>{{ venue_aggregates.count }} results for "{{ query }}"</h1>
-
+      <h1>{{ venue_aggregates.count }} results for <span class="query">{{ query }}</span></h1>
       {% for venue in venues %}
       <div class="discover-venue-info">
         <div class="venue-title"><h3>{{ venue.name }}</h3></div>

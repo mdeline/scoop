@@ -12,14 +12,6 @@
     margin-bottom: 50px;
 }
 
-.result-separator > hr {
-    border: 1px solid gray;
-}
-
-.result-separator {
-    padding-top: 10px;
-}
-
 .discover-venue-info {
     display: flex;
     flex-flow: column nowrap;
@@ -28,12 +20,24 @@
 .info-body {
     display: flex;
     flex-flow: row;
+    justify-content: space-between;
 }
 
 .info-left > div {
     padding-bottom: 10px;
     padding-right: 20px;
 }
+
+.result-separator > hr {
+    border: 1px solid gray;
+}
+
+.result-separator {
+    padding-top: 10px;
+}
+
+
+
 
 .venue-img {
 	width: 300px;

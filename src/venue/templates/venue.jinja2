@@ -7,100 +7,91 @@
         type="text/css"
   />
 
-  <div id="venue-container">
-    <div id="venue-info">
-      
-      <div id="venue-info-body">
-      
-        <div id="venue-info-body-left">
-          <div id="venue-info-header">
-            <h1>{{ venue.name }}</h1>
-          </div>
-          <div id="venue-info-body-description">
-            <span>{{ venue.description }}</span>
-          </div>
-          <div id="venue-info-body-address">
-            <span>{{ venue.street_address }},</span>
-            <span>{{ venue.postal_code }} {{ venue.city }}</span>
-          </div>
-
-          <div id="venue-info-body-aggregates">
-          {% if review_aggregates.review_count > 0 %}
-            <span>{{ review_aggregates.review_avg }} average rating,</span>
+  <div class="venue-container">
+    <div class="venue-content-area">
+      <div class="venue-info">
+        <div class="venue-title">
+          <h1>{{ venue.name }}</h1>
+        </div>
+        <div class="venue-info-body">
+          <div class="venue-info-body-left">
+            <div class="venue-description"><span>{{ venue.description }}</span></div>
+            <div class="venue-address">
+              <span>{{ venue.street_address }},</span>
+              <span>{{ venue.postal_code }}</span>
+              <span>{{ venue.city }}</span>
+            </div>
+            <div class="venue-info-aggregates">
+            {% if review_aggregates.review_count > 0 %}
+              <span>{{ review_aggregates.review_avg }} average rating,</span>
             {% if review_aggregates.review_count > 1 %}
               <span>{{ review_aggregates.review_count }} reviews</span>
             {% else %}
               <span>{{ review_aggregates.review_count }} review</span>
             {% endif %}
-          {% else %}
-            <span>No ratings yet.</span>
-          {% endif %}
+            {% else %}
+              <span>No ratings yet.</span>
+            {% endif %}
+            </div>
           </div>
-          
-        </div>
-        <div id="venue-info-body-right">
-          {% if venue.img_url %}
-            <img id="venue-img" src="{{ venue.img_url }}" alt="Picture of the venue.">
-          {% else %}
-            <img id="venue-img" src="/static/img_unavailable.png" alt="No venue image available.">
-          {% endif %}
 
+          <div class="venue-info-body-right">
+            {% if venue.img_url %}
+              <img class="venue-img" src="{{ venue.img_url }}" alt="Picture of the venue.">
+            {% else %}
+              <img class="venue-img" src="/static/img_unavailable.png" alt="No venue image available.">
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
     
-    <div class = "community_review>">
-      <h2>Community reviews</h2>
-      <hr>
-      {% for review in reviews %}
-        <table id = "individual_review">
-          <tr>
-            <td>{{ review.user }} rated it 
-              {% for x in range(1, (review.stars + 1)) %}
-                <span>★</span>
-              {% endfor %}
-            </td>
-            <td>{{ review.created_at.strftime('%d.%m.%Y') }}</td>
-          </tr>
-          <tr>
-            <td>{{ review.review }}</td>
-          </tr>
-        </table>
-      {% endfor %}
-    </div>
+      <div class="community_reviews>">
+        {% if reviews %}
+          <h2>Community reviews</h2>
+          {% for review in reviews %}
+          <div class="individual-review">
+            <div class="review-left">
+              <div class="review-section"><img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available."></div>
+              <div class="review-section">
+                <div class="user-rating">
+                  {{ review.user }} rated it 
+                  {% for x in range(1, (review.stars + 1)) %}
+                    <span>★</span>
+                  {% endfor %}
+                </div>
+                <div class="user-review">
+                  <span>{{ review.review }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="review-section">
+              <span>{{ review.created_at.strftime('%d.%m.%Y') }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
 
-    <div id = "add_review">
-      <h3>Start a review</h3>
-      <hr>
-      <form method="POST" action="/venue/review">
-      <table>
-        <tr>
-          <td>My rating:</td>
-        </tr>
-        <tr>
-          <td>
-            <ul class="rate-area">
-	            <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>
-	            <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="I would recommend.">4 stars</label>
-	            <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="It was okay, I guess.">3 stars</label>
-	            <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not worth it.">2 stars</label>
-	            <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Would never ever visit again.">1 star</label>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>How did you like it?</td>
-        </tr>
-        <tr>
-          <td><input type="text" id="review_field" name="review" size="50" /></td>
-        </tr>
-        <tr>
-          <td><input type="submit" value="Add a review." /></td>
-        </tr>
-      </table>
-      <input type="hidden" name="venue_id" value="{{ venue.id }}">
+    <div><h3>Start a review</h3></div>
+    <div class="review-form-area">
+      <form class="review-form" method="POST" action="/venue/review">
+        <div><span>Review:</span></div>
+        <div><input type="text" id="review_field" name="review" size="50" /></div>
+        <div><span>Rating:</span></div>
+        <div>
+          <div class="rate-area">
+	          <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>
+	          <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="I would recommend.">4 stars</label>
+	          <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="It was okay, I guess.">3 stars</label>
+	          <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not worth it.">2 stars</label>
+	          <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Would never ever visit again.">1 star</label>
+          </div>
+        </div>
+        <input id="review-submit" type="submit" value="Submit" />
+        <input type="hidden" name="venue_id" value="{{ venue.id }}">
       </form>
     </div>
   </div>
+</div>
 
 {% endblock %}
