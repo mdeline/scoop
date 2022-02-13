@@ -26,13 +26,14 @@ class RegisterForm(FlaskForm):
     password = PasswordField(
         "Password",
         validators=[
-            DataRequired()
+            DataRequired(),
+            Length(min=5)
         ]
     )
     confirmPassword = PasswordField(
         "Repeat Password",
         validators=[
-            EqualTo('password', message="Passwords must match")
+            EqualTo('password', message="Passwords must match."),  
         ]
     )
     # recaptcha = RecaptchaField() todo: do later
