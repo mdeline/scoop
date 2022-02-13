@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, session
 from .. import db
 
 discover_pb = Blueprint(
@@ -37,15 +37,53 @@ def discover_all():
 def discover_query():
     query = request.args["query"]
     query_cleaned = query.lower()
-    sql = (
+
+    sql_results = (
         "select * from venue "
         + "where lower(street_address) like :query_cleaned "
         + "or postal_code like :query_cleaned "
         + "or lower(city) like :query_cleaned " 
         + "or lower(neighbourhood) like :query_cleaned"
     )
-    venues = db.session.execute(sql, {"query_cleaned":"%"+query_cleaned+"%"}).fetchall()
-    venue_aggregates = db.session.execute("select count(*) as count from venue").fetchone()
+
+    sql_aggregates = (
+        "select count(*) as count from venue "
+        + "where lower(street_address) like :query_cleaned "
+        + "or postal_code like :query_cleaned "
+        + "or lower(city) like :query_cleaned " 
+        + "or lower(neighbourhood) like :query_cleaned"
+    )
+
+    venues = db.session.execute(
+        sql_results, 
+        {"query_cleaned":"%"+query_cleaned+"%"}
+    ).fetchall()
+
+    venue_aggregates = db.session.execute(
+        sql_aggregates,
+        {"query_cleaned":"%"+query_cleaned+"%"}
+    ).fetchone()
+
+    return render_template(
+        "discover_results.jinja2", 
+        venues=venues,
+        query=query,
+        venue_aggregates=venue_aggregates
+    )
+
+@discover_pb.route("/neighbourhood", methods=['GET', 'POST'])
+def discover_neighbourhood():
+    query = request.args["query"]
+
+    venues = db.session.execute(
+        "select * from venue where neighbourhood=:query", 
+        {"query":query}
+    ).fetchall()
+
+    venue_aggregates = db.session.execute(
+        "select count(*) as count from venue where neighbourhood=:query",
+        {"query":query}
+    ).fetchone()
 
     return render_template(
         "discover_results.jinja2", 
