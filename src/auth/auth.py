@@ -14,12 +14,10 @@ auth_bp = Blueprint(
 def register():
     form = RegisterForm()
     failed_registration = ''
-    validate = form.validate_on_submit()
-    email_exists_apu = ''
     if form.validate_on_submit():
-        sql = "select * from appuser where email=:email"
-        email_exists = db.session.execute(sql, {'email':form.email.data.lower()}).first()
-        if email_exists is None:
+        sql = "select exists(select 1 from scoop.appuser where email=:email) as email_exists"
+        email_exists = db.session.execute(sql, {'email':form.email.data.lower()}).first().email_exists
+        if email_exists is False:
             hash_value = generate_password_hash(form.password.data)
             sql = "insert into appuser (fullname, email, password, role_id) VALUES (:fullname, :email, :password, 1)"
             db.session.execute(sql, {"fullname":form.fullname.data, "email":form.email.data.lower(), "password":hash_value})
