@@ -37,16 +37,19 @@ def discover_all():
 def discover_query():
     query = request.args["query"]
     query_cleaned = query.lower()
-    sql =   ("select * from scoop.venue "
-            + "where lower(street_address) like :query_cleaned "
-            + "or postal_code like :query_cleaned "
-            + "or lower(city) like :query_cleaned " 
-            + "or lower(neighbourhood) like :query_cleaned"
-            )
-    result = db.session.execute(sql, {"query_cleaned":"%"+query_cleaned+"%"})
-    venues = result.fetchall()
+    sql = (
+        "select * from venue "
+        + "where lower(street_address) like :query_cleaned "
+        + "or postal_code like :query_cleaned "
+        + "or lower(city) like :query_cleaned " 
+        + "or lower(neighbourhood) like :query_cleaned"
+    )
+    venues = db.session.execute(sql, {"query_cleaned":"%"+query_cleaned+"%"}).fetchall()
+    venue_aggregates = db.session.execute("select count(*) as count from venue").fetchone()
+
     return render_template(
         "discover_results.jinja2", 
         venues=venues,
+        venue_aggregates=venue_aggregates,
         query=query
     )
