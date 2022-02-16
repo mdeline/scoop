@@ -54,25 +54,3 @@ class LoginForm(FlaskForm):
         ]
     )
     submit = SubmitField('Submit')
-
-class ReviewForm(FlaskForm):
-    review = StringField(
-        'Review',
-        validators=[
-            DataRequired()
-        ]
-    )
-    ratearea = RadioField(
-        'Rating', 
-        choices=[
-            ('5', '1 star.'), # id = rate-area-5 , value = 5
-            ('4', '2 stars'), # id = rate-area-4, value = 4
-            ('3', '3 stars'), # id = rate-area-3, value = 3
-            ('2', '4 stars'),
-            ('1', '5 stars')
-        ],
-        validators=[
-            DataRequired()
-        ])
-    submit = SubmitField('Add a Review')
-

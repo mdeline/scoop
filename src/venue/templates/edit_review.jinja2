@@ -1,0 +1,33 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+  <link
+        rel="stylesheet"
+        href="/venue/static/venue.css"
+        type="text/css"
+  />
+
+  <div class="edit-container">
+    <div class="edit-content-area">
+    <div><h3>Edit the review</h3></div>
+    <div class="review-form-area">
+      <form class="review-form" method="POST" action="/venue/review">
+        <div><span>Review:</span></div>
+        <div><input type="text" id="review_field" name="review" size="50" /></div>
+        <div><span>Rating:</span></div>
+        <div>
+          <div class="rate-area">
+	          <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>
+	          <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="I would recommend.">4 stars</label>
+	          <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="It was okay, I guess.">3 stars</label>
+	          <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not worth it.">2 stars</label>
+	          <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Would never ever visit again.">1 star</label>
+          </div>
+        </div>
+        <input id="review-submit" type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

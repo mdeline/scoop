@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from ..forms import ReviewForm
 from .. import db
 
 venue_bp = Blueprint(
@@ -11,33 +10,30 @@ venue_bp = Blueprint(
 @venue_bp.route('/<venue_id>', methods=['GET'])
 def venue(venue_id):
     # Venue info
-    result = db.session.execute(
+    venue = db.session.execute(
         'select * from scoop.venue '
         + 'where id = :venue_id',
         {'venue_id': venue_id}
-    )
-    venue = result.fetchone()
+    ).fetchone()
 
     # Review count & review average
-    result = db.session.execute(
+    review_aggregates = db.session.execute(
         'select '
         + 'coalesce(avg(stars)::numeric(3,2), 0) as review_avg, '
         + 'coalesce(count(review), 0) as review_count '
         + 'from scoop.review '
         + 'where venue_id = :venue_id',
         {'venue_id': venue_id}
-    )
-    review_aggregates = result.fetchone()
+    ).fetchone()
 
     # Reviews
-    result = db.session.execute(
-        'select review, stars, appuser.fullname as user, created_at '
+    reviews = db.session.execute(
+        'select review.id, review, stars, appuser.fullname as user, created_at '
         + 'from review '
         + 'inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id '
         + 'where venue_id = :venue_id '
         + 'order by created_at desc',
-        {'venue_id':venue_id})
-    reviews = result.fetchall()
+        {'venue_id':venue_id}).fetchall()
 
     return render_template(
         'venue.jinja2',
@@ -63,3 +59,15 @@ def review():
     })
     db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))
+
+@venue_bp.route('/<venue_id>/review/<review_id>', methods=['GET', 'POST'])
+def edit_review(venue_id, review_id):
+    review = db.session.execute(
+        'select * from review where id = :review_id',
+        {'review_id': review_id}
+    ).fetchone()
+
+    return render_template(
+        'edit_review.jinja2',
+        review=review
+    )

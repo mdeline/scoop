@@ -66,6 +66,8 @@
             </div>
             <div class="review-section">
               <span>{{ review.created_at.strftime('%d.%m.%Y') }}</span>
+              <a href="/venue/{{ venue.id }}/review/{{ review.id }}"><button class="venue-link">edit</button></a>
+              <span><button>delete</button></span>
             </div>
           </div>
           {% endfor %}
