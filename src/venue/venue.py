@@ -28,12 +28,13 @@ def venue(venue_id):
 
     # Reviews
     reviews = db.session.execute(
-        'select review.id, review, stars, appuser.fullname as user, created_at '
-        + 'from review '
+        'select review.id, review, stars, appuser.fullname as user, '
+        + 'appuser_id, created_at, modified_at from review '
         + 'inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id '
         + 'where venue_id = :venue_id '
         + 'order by created_at desc',
-        {'venue_id':venue_id}).fetchall()
+        {'venue_id':venue_id}
+    ).fetchall()
 
     return render_template(
         'venue.jinja2',
@@ -60,8 +61,8 @@ def review():
     db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))
 
-@venue_bp.route('/<venue_id>/review/<review_id>', methods=['GET', 'POST'])
-def edit_review(venue_id, review_id):
+@venue_bp.route('/<venue_id>/review/<review_id>', methods=['GET'])
+def get_review(venue_id, review_id):
     review = db.session.execute(
         'select * from review where id = :review_id',
         {'review_id': review_id}
@@ -71,3 +72,20 @@ def edit_review(venue_id, review_id):
         'edit_review.jinja2',
         review=review
     )
+
+@venue_bp.route('/<venue_id>/review/<review_id>', methods=['POST'])
+def edit_review(venue_id, review_id):
+    review = request.form["review"]
+    rating = request.form["rating"]
+
+    db.session.execute(
+        'update review set review = :review, stars = :stars, modified_at = now() '
+        + 'where id = :review_id',
+        {
+            'review': review,
+            'stars': rating,
+            'review_id': review_id
+        }
+    )
+    db.session.commit()
+    return redirect(url_for("venue_bp.venue", venue_id=venue_id))

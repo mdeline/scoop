@@ -76,6 +76,10 @@ h1, h2, h3 {
 	flex-flow: column nowrap;
 }
 
+.edit{
+	font-style: italic;
+}
+
 #review_field {
 	height: 100px;
 }
