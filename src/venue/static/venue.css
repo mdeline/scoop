@@ -1,7 +1,6 @@
 .venue-container {
 	display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
     align-items: center;
     padding-top: 16px;
     padding-bottom: 192px;
@@ -43,16 +42,21 @@ h1, h2, h3 {
 .individual-review {
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-between;
-}
-
-.review-left {
-	display: flex;
-	flex-flow: row nowrap;
 }
 
 .review-section {
 	padding: 10px;
+}
+
+.headline {
+	display: flex;
+	justify-content: space-between;
+	flex-flow: row nowrap;
+	padding-bottom: 5px;
+}
+
+.content {
+	flex: max-content;
 }
 
 .profile-img {
@@ -60,7 +64,6 @@ h1, h2, h3 {
 	height: 100px;
 	object-fit: cover;
 	border-radius: 10px;
-
 }
 
 .venue-info-aggregates {
@@ -76,8 +79,12 @@ h1, h2, h3 {
 	flex-flow: column nowrap;
 }
 
-.edit{
+.edit {
 	font-style: italic;
+}
+
+.star {
+	color: orangered;
 }
 
 #review_field {

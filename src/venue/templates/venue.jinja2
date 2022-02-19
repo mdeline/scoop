@@ -50,31 +50,38 @@
           <h2>Community reviews</h2>
           {% for review in reviews %}
           <div class="individual-review">
-            <div class="review-left">
-              <div class="review-section"><img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available."></div>
-              <div class="review-section">
+            <div class="review-section">
+              <img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available.">
+            </div>
+
+              
+            <div class="review-section content">
+              <div class="headline">
                 <div class="user-rating">
                   {{ review.user }} rated it 
                   {% for x in range(1, (review.stars + 1)) %}
-                    <span>★</span>
+                    <span class="star">★</span>
                   {% endfor %}
                 </div>
-                <div class="user-review">
-                  <span>{{ review.review }}</span>
+                <div class="timestamps">
+                  {% if review.modified_at %}
+                    <span class="timestamp edit">edited {{ review.modified_at.strftime('%d.%m.%Y') }}</span>
+                  {% else %}
+                    <span class="timestamp created">{{ review.created_at.strftime('%d.%m.%Y') }}</span>
+                  {% endif%}
+                  {% if session.appuser_id == review.appuser_id %}
+                    <a href="/venue/{{ venue.id }}/review/{{ review.id }}"><button class="venue-link">edit</button></a>
+                    <span><button>delete</button></span>
+                  {% endif %}
                 </div>
               </div>
+                
+              <div class="user-review">
+                <span>{{ review.review }}</span>
+              </div>
+
             </div>
-            <div class="review-section">
-              {% if review.modified_at %}
-                <span class="timestamp edit">edited {{ review.modified_at.strftime('%d.%m.%Y') }}</span>
-              {% else %}
-                <span class="timestamp created">{{ review.created_at.strftime('%d.%m.%Y') }}</span>
-              {% endif%}
-              {% if session.appuser_id == review.appuser_id %}
-              <a href="/venue/{{ venue.id }}/review/{{ review.id }}"><button class="venue-link">edit</button></a>
-              <span><button>delete</button></span>
-              {% endif %}
-            </div>
+            
           </div>
           {% endfor %}
         {% endif %}
