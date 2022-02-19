@@ -75,6 +75,22 @@ h1, h2, h3 {
 	flex-flow: column nowrap;
 }
 
+.review-form-inner-container {
+	max-width: 700px;
+}
+
+textarea {
+	width: 100%;
+	height: 160px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 16px;
+}
+
+
 .review-form {
 	display: flex;
 	flex-flow: column nowrap;
@@ -86,10 +102,6 @@ h1, h2, h3 {
 
 .star {
 	color: orangered;
-}
-
-#review_field {
-	height: 100px;
 }
 
 .rate-area {

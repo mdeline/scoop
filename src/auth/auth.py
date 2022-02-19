@@ -63,5 +63,6 @@ def success():
 
 @auth_bp.route("/logout")
 def logout():
+    del session["appuser_id"]
     del session["appuser_fullname"]
     return redirect(url_for("home_bp.home"))
