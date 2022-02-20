@@ -47,10 +47,14 @@
     
       <div class="review-form-container">
         <h2>Start your review of {{ venue.name }}</h2>
-        {% if session.appuser_id %}
+        {% if session.logged_in %}
         <div class="individual-review review-form-inner-container">
           <div class="review-section">
-            <img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available.">
+            {% if session.user_photo %}
+              <img class="profile-img" src="{{ session.user_photo }}" alt="Picture of the review writer.">
+            {% else %}
+              <img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available.">
+            {% endif %}
           </div>
           <form class="review-form content" method="POST" action="/venue/review">
             <textarea class="review-section" name="review" rows="10" cols="25"></textarea>
@@ -77,7 +81,11 @@
           {% for review in reviews %}
           <div class="individual-review">
             <div class="review-section">
+              {% if review.user_photo %}
+              <img class="profile-img" src="{{ review.user_photo }}" alt="Picture of the review writer.">
+              {% else %}
               <img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available.">
+              {% endif %}
             </div>
             <div class="review-section content">
               <div class="headline">

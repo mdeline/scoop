@@ -89,6 +89,7 @@ create table scoop.appuser (
     email varchar(50) not null,
     password text not null,
     role_id bigint not null,
+    img_url text null,
     constraint appuser_pk primary key (id),
     constraint appuser_email_uk unique (email),
 	constraint appuser_role_fk foreign key(role_id) references scoop.role(id)

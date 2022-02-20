@@ -10,7 +10,7 @@
       <a class="nav-item" href="{{ url_for('discover_pb.discover_all') }}"><button class="nav-button nav-discover">Discover local restaurants</button></a>
     </div>
     <div class="nav-right">
-        {% if session.appuser_fullname %}
+        {% if session.logged_in %}
           <a class="nav-item" href="/"><button class="nav-button nav-user">{{ session.appuser_fullname }}</button></a>
           <a class="nav-item" href="{{ url_for('auth_bp.logout') }}"><button class="nav-button nav-logout">Logout</button></a>
         {% else %}

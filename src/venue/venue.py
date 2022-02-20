@@ -29,10 +29,11 @@ def venue(venue_id):
     # Reviews
     reviews = db.session.execute(
         'select review.id, review, stars, appuser.fullname as user, '
-        + 'appuser_id, created_at, modified_at from review '
+        + 'appuser_id, created_at, modified_at, img_url as user_photo from review '
         + 'inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id '
         + 'where venue_id = :venue_id '
-        + 'order by created_at desc',
+        + 'order by created_at desc '
+        + 'limit 10',
         {'venue_id':venue_id}
     ).fetchall()
 

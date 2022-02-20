@@ -42,8 +42,10 @@ def login():
         if appuser:
             hashed_password = appuser.password
             if check_password_hash(hashed_password, form.password.data):
+                session['logged_in']=True
                 session["appuser_fullname"] = appuser.fullname
                 session["appuser_id"] = appuser.id
+                session['user_photo'] = appuser.img_url
                 return redirect(url_for("auth_bp.success"))
         failed_login = 'Invalid email or password.'
     return render_template(
@@ -60,6 +62,7 @@ def success():
 
 @auth_bp.route("/logout")
 def logout():
+    session['logged_in']=False
     del session["appuser_id"]
     del session["appuser_fullname"]
     return redirect(url_for("home_bp.home"))
