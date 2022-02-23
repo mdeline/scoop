@@ -38,12 +38,14 @@ def venue(venue_id):
         {'venue_id':venue_id}
     ).fetchall()
 
-    return render_template(
-        'venue.jinja2',
-        venue=venue,
-        review_aggregates=review_aggregates,
-        reviews=reviews
-    )
+    if venue:
+        return render_template(
+            'venue.jinja2',
+            venue=venue,
+            review_aggregates=review_aggregates,
+            reviews=reviews
+        )
+    return redirect(url_for("home_bp.home")) 
 
 @venue_bp.route('/review', methods=['POST'])
 def review():
@@ -70,41 +72,50 @@ def get_review(venue_id, review_id):
         {'review_id': review_id}
     ).fetchone()
 
-    return render_template(
-        'edit_review.jinja2',
-        review=review
-    )
+    if review and session["appuser_id"] and session["appuser_id"] == review.appuser_id:
+        return render_template(
+            'edit_review.jinja2',
+            review=review
+        )
+    return redirect(url_for("venue_bp.venue", venue_id=venue_id)) 
 
-@venue_bp.route('/<venue_id>/review/<review_id>', methods=['POST'])
+@venue_bp.route('/<venue_id>/review/<review_id>', methods=['GET', 'POST'])
 def edit_review(venue_id, review_id):
     review = request.form["review"]
     rating = request.form["rating"]
 
-    db.session.execute(
-        'update review set review = :review, stars = :stars, modified_at = now() '
-        + 'where id = :review_id',
-        {
-            'review': review,
-            'stars': rating,
-            'review_id': review_id
-        }
-    )
-    db.session.commit()
+    # Review's writer
+    review_writer = db.session.execute(
+        'select appuser_id from review where id = :review_id',
+        {'review_id': review_id}
+    ).fetchone().appuser_id
+
+    if session["appuser_id"] and session["appuser_id"] == review_writer:
+        db.session.execute(
+            'update review set review = :review, stars = :stars, modified_at = now() '
+            + 'where id = :review_id',
+            {
+                'review': review,
+                'stars': rating,
+                'review_id': review_id
+            }
+        )
+        db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))
 
 @venue_bp.route('/<venue_id>/review/<review_id>/delete', methods=['GET'])
 def delete_review(venue_id, review_id):
     # Current user
-    review = db.session.execute(
+    review_writer = db.session.execute(
         'select appuser_id from review where id = :review_id',
         {'review_id': review_id}
-    ).fetchone()
+    ).fetchone().appuser_id
 
-    if session["appuser_id"] == review.appuser_id:
+    if session["appuser_id"] and session["appuser_id"] == review_writer:
         db.session.execute(
             'update review set deleted = true '
             + 'where id = :review_id',
             {'review_id': review_id}
         )
-    db.session.commit()
+        db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))

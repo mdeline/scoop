@@ -11,9 +11,11 @@
     <div class="edit-content-area">
     <div><h3>Edit the review</h3></div>
     <div class="review-form-area">
-      <form class="review-form" method="POST" action="/venue/{{ review.venue_id }}/review/{{ review.id }}">
+      <form class="review-form" method="POST" action="{{ url_for('venue_bp.edit_review', venue_id=review.venue_id, review_id=review.id) }}">
         <div><span>Review:</span></div>
-        <div><input type="text" id="review_field" name="review" size="50" value="{{ review.review }}" /></div>
+        <div>
+          <input type="text" id="review_field" name="review" size="50" value="{{ review.review }}" />
+        </div>
         <div><span>Rating:</span></div>
         <div>
           <div class="rate-area">
