@@ -102,8 +102,8 @@
                     <span class="timestamp created">{{ review.created_at.strftime('%d.%m.%Y') }}</span>
                   {% endif%}
                   {% if session.appuser_id == review.appuser_id %}
-                    <a href="/venue/{{ venue.id }}/review/{{ review.id }}"><button class="venue-link">edit</button></a>
-                    <span><button>delete</button></span>
+                    <a href="{{ url_for('venue_bp.edit_review', venue_id=venue.id, review_id=review.id) }}"><button class="">edit</button></a>
+                    <a href="{{ url_for('venue_bp.delete_review', venue_id=venue.id, review_id=review.id) }}"><button class="">delete</button></a>
                   {% endif %}
                 </div>
               </div>

@@ -123,6 +123,7 @@ create table scoop.review
     stars int not null,
     created_at timestamptz not null default now(),
     modified_at timestamptz null,
+    deleted boolean not null default false,
     constraint review_pk primary key (id),
     constraint venue_id_fk foreign key(venue_id) references scoop.venue(id),
     constraint appuser_id_fk foreign key(appuser_id) references scoop.appuser(id)

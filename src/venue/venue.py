@@ -32,6 +32,7 @@ def venue(venue_id):
         + 'appuser_id, created_at, modified_at, img_url as user_photo from review '
         + 'inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id '
         + 'where venue_id = :venue_id '
+        + 'and deleted = false '
         + 'order by created_at desc '
         + 'limit 10',
         {'venue_id':venue_id}
@@ -52,7 +53,7 @@ def review():
     venue_id = request.form["venue_id"]
     
     #todo: use form validation
-    sql = 'insert into scoop.review(review, stars, appuser_id, venue_id) values(:review, :rating, :appuser_id, :venue_id)'
+    sql = 'insert into scoop.review(review, stars, appuser_id, venue_id, deleted) values(:review, :rating, :appuser_id, :venue_id, false)'
     db.session.execute(sql, {
         'review': review,
         'rating': rating,
@@ -88,5 +89,22 @@ def edit_review(venue_id, review_id):
             'review_id': review_id
         }
     )
+    db.session.commit()
+    return redirect(url_for("venue_bp.venue", venue_id=venue_id))
+
+@venue_bp.route('/<venue_id>/review/<review_id>/delete', methods=['GET'])
+def delete_review(venue_id, review_id):
+    # Current user
+    review = db.session.execute(
+        'select appuser_id from review where id = :review_id',
+        {'review_id': review_id}
+    ).fetchone()
+
+    if session["appuser_id"] == review.appuser_id:
+        db.session.execute(
+            'update review set deleted = true '
+            + 'where id = :review_id',
+            {'review_id': review_id}
+        )
     db.session.commit()
     return redirect(url_for("venue_bp.venue", venue_id=venue_id))
