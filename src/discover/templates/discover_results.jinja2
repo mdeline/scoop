@@ -9,7 +9,11 @@
   <div class="discover-container">
     <div class="discover-content-area">
       {% if venues %}
-      <h1>{{ venue_aggregates.count }} results for <span class="query">"{{ query }}"</span></h1>
+        {% if venue_aggregates.count > 1%}
+          <h1>{{ venue_aggregates.count }} results for <span class="query">"{{ query }}"</span></h1>
+        {% else %}
+          <h1>{{ venue_aggregates.count }} result for <span class="query">"{{ query }}"</span></h1>
+        {% endif %}
       {% for venue in venues %}
       <div class="discover-venue-info">
         <div class="venue-title"><h3>{{ venue.name }}</h3></div>

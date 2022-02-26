@@ -40,7 +40,8 @@ def discover_query():
 
     sql_results = (
         "select * from venue "
-        + "where lower(street_address) like :query_cleaned "
+        + "where lower(name) like :query_cleaned "
+        + "or lower(street_address) like :query_cleaned "
         + "or postal_code like :query_cleaned "
         + "or lower(city) like :query_cleaned " 
         + "or lower(neighbourhood) like :query_cleaned"
@@ -48,7 +49,8 @@ def discover_query():
 
     sql_aggregates = (
         "select count(*) as count from venue "
-        + "where lower(street_address) like :query_cleaned "
+        + "where lower(name) like :query_cleaned "
+        + "or lower(street_address) like :query_cleaned "
         + "or postal_code like :query_cleaned "
         + "or lower(city) like :query_cleaned " 
         + "or lower(neighbourhood) like :query_cleaned"
