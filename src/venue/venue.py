@@ -22,7 +22,8 @@ def venue(venue_id):
         + 'coalesce(avg(stars)::numeric(3,2), 0) as review_avg, '
         + 'coalesce(count(review), 0) as review_count '
         + 'from scoop.review '
-        + 'where venue_id = :venue_id',
+        + 'where venue_id = :venue_id '
+        + 'and deleted = false',
         {'venue_id': venue_id}
     ).fetchone()
 
@@ -33,8 +34,7 @@ def venue(venue_id):
         + 'inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id '
         + 'where venue_id = :venue_id '
         + 'and deleted = false '
-        + 'order by created_at desc '
-        + 'limit 10',
+        + 'order by created_at desc',
         {'venue_id':venue_id}
     ).fetchall()
 

@@ -107,10 +107,8 @@ h1, h2, h3 {
 }
 
 .review-button {
-
 	border-radius: 5px;
     padding: 3px 5px 3px 5px;
-
     cursor: pointer;
 	border: none;
 }
@@ -204,4 +202,8 @@ h1, h2, h3 {
 #review-submit:hover {
     background-color: darkslateblue;
 	color: white;
+}
+
+a {
+    text-decoration: none;
 }

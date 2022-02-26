@@ -73,7 +73,7 @@
           </form>
         </div>
         {% else %}
-        <span><a href="{{ url_for('auth_bp.login') }}">Login</a> to start a review.</span>
+        <span class="review-section"><a href="{{ url_for('auth_bp.login') }}">Login</a> to start a review.</span>
         {% endif %}
       </div>
       <div class="community_reviews>">
@@ -115,7 +115,7 @@
           </div>
           {% endfor %}
         {% else %}
-          <span>No reviews yet.</span>
+          <span class="review-section">No reviews yet.</span>
         {% endif %}
       </div>
     
