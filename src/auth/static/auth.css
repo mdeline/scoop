@@ -7,24 +7,44 @@ h1 {
 
 .auth-container {
     display: flex;
-    background-color: darkslateblue;
+    background-color: whitesmoke;
     height: 100%;
     padding: 0;
     margin: 0;
     align-items: center;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
 }
 
 .auth-form {
     display: block;
     min-width: 300px;
     max-width: 675px;
+    margin-top: 100px;
     background-color: white;
     border-radius: 10px;
     padding: 40px 40px 50px 40px;
-    box-shadow: 5px 5px 5px rgb(54, 46, 107);
+    box-shadow: 5px 5px 5px rgb(202, 201, 201);
+}
+.home-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: whitesmoke;
+}
+
+.home-content-area {
+    width: 750px;
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 10px;
+    justify-content: center;
+    background-color: white;
+    margin-top: 100px;
+    box-shadow: 5px 5px 5px rgb(202, 201, 201);
 }
 
 .register {

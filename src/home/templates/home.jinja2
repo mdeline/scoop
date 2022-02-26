@@ -7,15 +7,23 @@
         type="text/css"
     />
 
-    <div id="home-container">
-        <h1 id="home-title">Meet your next favorite restaurant</h1>
-        <img id="home-img" src="/static/home-pineapple.jpg" width="300" height="auto">
-        <form id="home-form" action="/discover/search" method="GET">
-            <input id="home-query" type="text" name="query" placeholder="e.g. Kallio">
-            <button id="home-submit" type="submit">Search</button>
-        </form>
-        <div id="home-info">
-            <p>You can search by street address, postal code, city or neighbourhood.</p>
+    <div class="home-container">
+        <div class="home-content-area">
+            
+            <div class="home-content-left">
+                <img class="scoop-logo" src="/static/scoop_logo.png">
+                <h1 class="home-title content-item">Meet your next favorite restaurant</h1>
+                <div class="content-item">
+                    <form class="home-form" action="/discover/search" method="GET">
+                        <input class="home-query" type="text" name="query" placeholder="e.g. Kallio">
+                        <button class="home-submit" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="home-info content-item">
+                    <p>You can search by street address, postal code, city or neighbourhood.</p>
+                </div>
+            </div>
+            <img class="home-img" src="/static/frontpage_pasta_resized.jpg">
         </div>
     </div>
 {% endblock %}
