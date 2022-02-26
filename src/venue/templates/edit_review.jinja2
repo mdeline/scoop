@@ -7,16 +7,12 @@
         type="text/css"
   />
 
-  <div class="edit-container">
-    <div class="edit-content-area">
+  <div class="review-edit-container">
+    <div class="review-edit-content-area">
     <div><h3>Edit the review</h3></div>
     <div class="review-form-area">
       <form class="review-form" method="POST" action="{{ url_for('venue_bp.edit_review', venue_id=review.venue_id, review_id=review.id) }}">
-        <div><span>Review:</span></div>
-        <div>
-          <input type="text" id="review_field" name="review" size="50" value="{{ review.review }}" />
-        </div>
-        <div><span>Rating:</span></div>
+        <textarea class="edit-review-textarea" name="review" rows="10" cols="25">{{ review.review }}</textarea>
         <div>
           <div class="rate-area">
 	          <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>

@@ -70,19 +70,34 @@ h1, h2, h3 {
 	font-style: italic;
 }
 
-.review-form-area {
+.add-review-container {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+
+}
+
+.review-form-area {	
+}
+
+/* */
+.review-form {
 	display: flex;
 	flex-flow: column nowrap;
 }
 
-.review-form-inner-container {
-	max-width: 750px;
-	margin: 0 30px 0 30px;
+.add-review-content-area {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
 }
 
-textarea {
-	width: 100%;
-	height: 180px;
+.add-review-textarea {
+	max-width: 780px;
+	min-width: 780px;
+	max-height: 300px;
+	min-height: 115px;
+	height: 115px;
 	padding: 12px 20px;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
@@ -91,10 +106,40 @@ textarea {
 	font-size: 16px;
 }
 
+.review-button {
 
-.review-form {
+	border-radius: 5px;
+    padding: 3px 5px 3px 5px;
+
+    cursor: pointer;
+	border: none;
+}
+
+/* Review edit page */
+.review-edit-container {
 	display: flex;
-	flex-flow: column nowrap;
+	justify-content: center;
+}
+.review-edit-content-area {
+	max-width: 750px;
+	min-width: 500px;
+	margin: 0 30px 0 30px;
+	padding-bottom: 150px
+}
+
+.edit-review-textarea {
+	width: 100%;
+	max-width: 750px;
+	min-width: 500px;
+	max-height: 500px;
+	min-height: 300px;
+	height: 180px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 16px;
 }
 
 .edit {
@@ -150,8 +195,6 @@ textarea {
 #review-submit {
 	border-radius: 5px;
     padding: 10px 15px 10px 15px;
-    margin-left: 5px;
-    margin-right: 5px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;

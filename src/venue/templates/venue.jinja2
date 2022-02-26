@@ -45,10 +45,10 @@
         </div>
       </div>
     
-      <div class="review-form-container">
+      <div class="add-review-container">
         <h2>Start your review of {{ venue.name }}</h2>
         {% if session.logged_in %}
-        <div class="individual-review review-form-inner-container">
+        <div class="add-review-content-area">
           <div class="review-section">
             {% if session.user_photo %}
               <img class="profile-img" src="{{ session.user_photo }}" alt="Picture of the review writer.">
@@ -56,9 +56,10 @@
               <img class="profile-img" src="/static/img_unavailable.png" alt="No profile image available.">
             {% endif %}
           </div>
-          <form class="review-form content" method="POST" action="/venue/review">
-            <textarea class="review-section" name="review" rows="10" cols="25"></textarea>
-            <div>
+            
+          <form class="review-form review-section" method="POST" action="/venue/review">
+              <textarea class="add-review-textarea" name="review" rows="10" cols="25"></textarea>
+              <div>
               <div class="rate-area">
 	              <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Can't wait to visit again.">5 stars</label>
 	              <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="I would recommend.">4 stars</label>
@@ -102,8 +103,8 @@
                     <span class="timestamp created">{{ review.created_at.strftime('%d.%m.%Y') }}</span>
                   {% endif%}
                   {% if session.appuser_id == review.appuser_id %}
-                    <a href="{{ url_for('venue_bp.edit_review', venue_id=venue.id, review_id=review.id) }}"><button class="">edit</button></a>
-                    <a href="{{ url_for('venue_bp.delete_review', venue_id=venue.id, review_id=review.id) }}"><button class="">delete</button></a>
+                    <a href="{{ url_for('venue_bp.edit_review', venue_id=venue.id, review_id=review.id) }}"><button class="review-button">edit</button></a>
+                    <a href="{{ url_for('venue_bp.delete_review', venue_id=venue.id, review_id=review.id) }}"><button class="review-button">delete</button></a>
                   {% endif %}
                 </div>
               </div>
