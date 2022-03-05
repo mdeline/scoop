@@ -112,6 +112,15 @@ create table scoop.venue (
     -- constraint venue_name_uk unique (name)
 );
 
+drop table if exists scoop.neighbourhood;
+create table scoop.neighbourhood (
+    id serial not null,
+    name text not null,
+	created_at timestamp with time zone not null default now(),
+    constraint neighbourhood_pk primary key (id),
+    constraint neighbourhood_name_uk unique(name)
+);
+
 -- Review
 drop table if exists scoop.review;
 create table scoop.review
