@@ -51,7 +51,6 @@
 }
 
 .discover-title {
-    border-bottom: 2px solid rgb(148, 139, 201);
     min-width: 300px;
 }
 
@@ -98,7 +97,7 @@
     padding: 5px 5px 10px 5px;
 }
 
-p, h3, h4 {
+p, h4 {
     margin: 0px;
     padding: 0px;
 }
