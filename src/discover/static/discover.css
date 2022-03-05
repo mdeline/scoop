@@ -43,6 +43,18 @@
 	border-radius: 10px;
 }
 
+.venue-img-2 {
+	width: 300px;
+	height: 220px;
+	object-fit: cover;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.discover-title {
+    border-bottom: 2px solid rgb(148, 139, 201);
+    min-width: 300px;
+}
+
 .discover-neighbourhoods-parent {
     display: flex;
     flex-wrap: wrap;
@@ -52,7 +64,13 @@
 
 .discover-neighbourhoods-child {
     margin: 25px;
-    border-style: dotted dashed solid double;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.13) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    width: 300px;
+}
+
+.discover-neighbourhoods-child:hover {
+    box-shadow: rgba(0, 0, 0, 0.13) 0px 3px 6px, rgba(0, 0, 0, 0.35) 0px 3px 6px;
 }
 
 .discover-neighbourhoods-child a:link, .discover-neighbourhoods-child a:visited {
@@ -63,21 +81,24 @@
 .discover-neighbourhoods-child-upper {
     flex-grow: 1;
     flex-basis: calc(50% - 20px);
-    margin: 10px;
+    margin: 0px;
     min-width: 300px;
-    border-style: dotted dashed solid double;
 }
 
-.discover-neighbourhoods-child-upper img {
+.discover-neighbourhoods-child img {
     display: block;
     max-width: auto;
     max-height: 200px;
 }
 
+
 .discover-neighbourhoods-child-lower {
-    flex-grow: 1;
-    flex-basis: calc(50% - 22px);    /*  22px = 2*10px margin + 2*1px border  */
     margin: 10px;
     min-width: 300px;
-    border-style: dotted dashed solid double;
+    padding: 5px 5px 10px 5px;
+}
+
+p, h3, h4 {
+    margin: 0px;
+    padding: 0px;
 }

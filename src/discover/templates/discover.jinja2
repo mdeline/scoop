@@ -8,24 +8,23 @@
     />
 
     <div class="discover-container">
-        <h1 class="discover-title">Discover new restaurants and cafes</h1>
+        <h1 class="discover-title">Discover local restaurants</h1>
         <div class="discover-neighbourhoods-parent">
             {% for neighbourhood in neighbourhoods %}
-            <a href="/discover/neighbourhood?query={{ neighbourhood.name }}">
             <div class="discover-neighbourhoods-child">
-                <div class="discover-neighbourhoods-child-upper">
-                    <img class="home-img" src="{{ neighbourhood.img_url }}" width="300" height="auto">
-                </div>
-                <div id="discover-neighbourhoods-child-lower">
-                    <p>{{ neighbourhood.name }}</p>
-                    {% if neighbourhood.venues_count > 1 %}
+                <a href="/discover/neighbourhood?query={{ neighbourhood.name }}">
+                    <div class="discover-neighbourhoods-child-upper">
+                        <img class="venue-img-2" src="{{ neighbourhood.img_url }}">
+                    </div>
+                    <div class="discover-neighbourhoods-child-lower">
+                        <h4>{{ neighbourhood.name }}</h4>
+                        {% if neighbourhood.venues_count > 1 %}
                         <p>{{ neighbourhood.venues_count }} venues</p>
-                    {% else %}
+                        {% else %}
                         <p>{{ neighbourhood.venues_count }} venue</p>
-                    {% endif%}
-                </div>
+                        {% endif%}
+                    </div>
                 </a>
-
             </div>
             {% endfor %}
         </div>
