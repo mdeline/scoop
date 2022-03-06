@@ -13,3 +13,10 @@ def home():
         "home.jinja2",
         template = "home-template"
     )
+
+@home_bp.route("/error", methods=["GET"])
+def error():
+    return render_template(
+        "error.jinja2",
+        template = "error-template"
+    )

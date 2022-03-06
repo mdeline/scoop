@@ -77,9 +77,14 @@ h1, h2, h3 {
 
 }
 
-.review-form-area {	
+.errors {
+	font-weight: lighter;
+	color: red;
+	list-style: none;
+	font-size: small;
+	margin: 0;
+	padding-bottom: 10px;
 }
-
 /* */
 .review-form {
 	display: flex;

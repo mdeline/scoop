@@ -90,17 +90,17 @@ def get_review(venue_id, review_id):
         {'review_id': review_id}
     ).fetchone()
 
-    if review and session["appuser_id"] and session["appuser_id"] == review.appuser_id:
+    if review and session.get('appuser_id') == review.appuser_id:
         return render_template(
             'edit_review.jinja2',
             review=review
         )
-    return redirect(url_for("venue_bp.venue", venue_id=venue_id)) 
+    return redirect(url_for("home_bp.error")) 
 
 @venue_bp.route('/<venue_id>/review/<review_id>', methods=['GET', 'POST'])
 def edit_review(venue_id, review_id):
-    review = request.form["review"]
-    rating = request.form["rating"]
+    review = request.form.get('review')
+    rating = request.form.get('rating')
 
     # Review's writer
     review_writer = db.session.execute(
@@ -108,7 +108,7 @@ def edit_review(venue_id, review_id):
         {'review_id': review_id}
     ).fetchone().appuser_id
 
-    if session["appuser_id"] and session["appuser_id"] == review_writer:
+    if review and rating and session.get('appuser_id') == review_writer:
         db.session.execute(
             'update review set review = :review, stars = :stars, modified_at = now() '
             + 'where id = :review_id',
@@ -119,7 +119,10 @@ def edit_review(venue_id, review_id):
             }
         )
         db.session.commit()
-    return redirect(url_for("venue_bp.venue", venue_id=venue_id))
+        return redirect(url_for("venue_bp.venue", venue_id=venue_id))
+    else:
+        flash('Please fill both review and rating fields.')
+        return redirect(url_for("venue_bp.edit_review", review_id=review_id, venue_id=venue_id))
 
 @venue_bp.route('/<venue_id>/review/<review_id>/delete', methods=['GET'])
 def delete_review(venue_id, review_id):

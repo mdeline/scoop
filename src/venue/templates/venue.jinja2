@@ -68,10 +68,10 @@
 	              <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Would never ever visit again.">1 star</label>
               </div>
             </div>
-            <input id="review-submit" type="submit" value="Submit" />
             {% for message in get_flashed_messages() %}
-              <span>{{ message }}</span>
+              <span class="errors">{{ message }}</span>
             {% endfor %}
+            <input id="review-submit" type="submit" value="Submit" />
             <input type="hidden" name="venue_id" value="{{ venue.id }}">
           </form>
         </div>
