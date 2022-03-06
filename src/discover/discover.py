@@ -15,7 +15,7 @@ def discover_all():
 		        neighbourhood_id, 
 		        img_url, 
     	        row_number() over (
-    		        partition by neighbourhood order by random()
+    		        partition by neighbourhood_id order by random()
     	        ) as row_num
             from scoop.venue 
 	        where neighbourhood_id is not null
@@ -51,21 +51,25 @@ def discover_query():
     query_cleaned = query.lower()
 
     sql_results = '''
-        select * from venue
-        where lower(name) like :query_cleaned
+        select 
+            venue.* 
+        from venue
+        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        where lower(venue.name) like :query_cleaned
         or lower(street_address) like :query_cleaned
         or postal_code like :query_cleaned
         or lower(city) like :query_cleaned 
-        or lower(neighbourhood) like :query_cleaned;
+        or lower(nh.name) like :query_cleaned;
     '''
 
     sql_aggregates = '''
         select count(*) as count from venue
-        where lower(name) like :query_cleaned
+        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        where lower(venue.name) like :query_cleaned
         or lower(street_address) like :query_cleaned
         or postal_code like :query_cleaned
         or lower(city) like :query_cleaned 
-        or lower(neighbourhood) like :query_cleaned;
+        or lower(nh.name) like :query_cleaned;
     '''
 
     venues = db.session.execute(
@@ -89,13 +93,24 @@ def discover_query():
 def discover_neighbourhood():
     query = request.args["query"]
 
-    venues = db.session.execute(
-        "select * from venue where neighbourhood=:query;", 
+    venues = db.session.execute('''
+        select
+            venue.*,
+            nh.name as neighbourhood
+        from venue
+        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        where nh.name = :query
+        ''',
         {"query":query}
     ).fetchall()
 
-    venue_aggregates = db.session.execute(
-        "select count(*) as count from venue where neighbourhood=:query;",
+    venue_aggregates = db.session.execute('''
+        select
+            count(*) as count
+        from venue
+        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        where nh.name = :query
+        ''',
         {"query":query}
     ).fetchone()
 
