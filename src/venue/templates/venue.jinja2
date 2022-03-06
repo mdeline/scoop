@@ -69,6 +69,9 @@
               </div>
             </div>
             <input id="review-submit" type="submit" value="Submit" />
+            {% for message in get_flashed_messages() %}
+              <span>{{ message }}</span>
+            {% endfor %}
             <input type="hidden" name="venue_id" value="{{ venue.id }}">
           </form>
         </div>
