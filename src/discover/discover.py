@@ -54,7 +54,7 @@ def discover_query():
         select 
             venue.* 
         from scoop.venue
-        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        inner join scoop.neighbourhood nh on nh.id = venue.neighbourhood_id
         where lower(venue.name) like :query_cleaned
         or lower(street_address) like :query_cleaned
         or postal_code like :query_cleaned
