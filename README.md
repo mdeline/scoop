@@ -1,5 +1,4 @@
-# Scoop
-Restaurant Finder
+# Scoop – Restaurant Finder
 http://scoop-project.herokuapp.com/
 
 Scoop lists information about restaurants and cafes located in Helsinki, Espoo and Vantaa and lets users to rate and review their experiences visiting these venues.
