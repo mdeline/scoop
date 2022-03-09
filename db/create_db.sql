@@ -95,6 +95,16 @@ create table scoop.appuser (
 	constraint appuser_role_fk foreign key(role_id) references scoop.role(id)
 );
 
+-- Neighbourhood
+drop table if exists scoop.neighbourhood;
+create table scoop.neighbourhood (
+    id serial not null,
+    name text not null,
+	created_at timestamp with time zone not null default now(),
+    constraint neighbourhood_pk primary key (id),
+    constraint neighbourhood_name_uk unique(name)
+);
+
 -- Venue
 drop table if exists scoop.restaurant, scoop.venue;
 create table scoop.venue (
@@ -106,19 +116,10 @@ create table scoop.venue (
     street_address varchar(50) not null,
     postal_code varchar(5) not null,
     city varchar(50) not null,
-    neighbourhood varchar(50) null,
+    neighbourhood_id bigint null,
 	created_at timestamp with time zone not null default now(),
-    constraint restaurant_pk primary key (id)
-    -- constraint venue_name_uk unique (name)
-);
-
-drop table if exists scoop.neighbourhood;
-create table scoop.neighbourhood (
-    id serial not null,
-    name text not null,
-	created_at timestamp with time zone not null default now(),
-    constraint neighbourhood_pk primary key (id),
-    constraint neighbourhood_name_uk unique(name)
+    constraint restaurant_pk primary key (id),
+    constraint neighbourhood_fk foreign key(neighbourhood_id) references scoop.neighbourhood(id),
 );
 
 -- Review
@@ -137,30 +138,3 @@ create table scoop.review
     constraint venue_id_fk foreign key(venue_id) references scoop.venue(id),
     constraint appuser_id_fk foreign key(appuser_id) references scoop.appuser(id)
 );
-
--- do later
--- Category
-create table scoop.category
-(
-    id serial not null,
-    name varchar(25) not null,
-    constraint category_pk primary key (id),
-    constraint category_name_uk unique(name)
-);
-
-insert into scoop.category(name) 
-values ('Korean'), ('Mexican'), ('Italian'), ('Nepalese'), ('Salad'), ('Dessert'), ('Street Food'), ('Vegan'); 
-
--- Venue Category
-create table scoop.venuecategory
-(
-    id serial not null,
-    venue_id bigint not null, -- fk
-    category_id bigint not null,
-    constraint venuecategory_pk primary key(id),
-    constraint venue_id_fk foreign key(venue_id) references scoop.venue(id),
-    constraint category_id_fk foreign key(category_id) references scoop.category(id)
-);
-
-insert into scoop.restaurantcategory(restaurant_id, category_id) 
-values (1, 1), (1, 6);
