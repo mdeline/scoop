@@ -59,6 +59,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: 15px;
+    max-width: 1200px;
 }
 
 .discover-neighbourhoods-child {
