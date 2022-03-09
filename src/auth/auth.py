@@ -19,7 +19,7 @@ def register():
         email_exists = db.session.execute(sql, {'email':form.email.data.lower()}).first().email_exists
         if email_exists is False:
             hash_value = generate_password_hash(form.password.data)
-            sql = "insert into appuser (fullname, email, password, role_id) VALUES (:fullname, :email, :password, 1)"
+            sql = "insert into scoop.appuser (fullname, email, password, role_id) VALUES (:fullname, :email, :password, 1)"
             db.session.execute(sql, {"fullname":form.fullname.data, "email":form.email.data.lower(), "password":hash_value})
             db.session.commit()
             return redirect(url_for("auth_bp.success"))

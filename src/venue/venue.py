@@ -41,7 +41,7 @@ def venue(venue_id):
             created_at, 
             modified_at, 
             img_url as user_photo 
-        from review
+        from scoop.review
         inner join scoop.appuser on scoop.appuser.id = scoop.review.appuser_id
         where venue_id = :venue_id
         and deleted = false
@@ -86,7 +86,7 @@ def review():
 @venue_bp.route('/<venue_id>/review/<review_id>', methods=['GET'])
 def get_review(venue_id, review_id):
     review = db.session.execute(
-        'select * from review where id = :review_id',
+        'select * from scoop.review where id = :review_id',
         {'review_id': review_id}
     ).fetchone()
 
@@ -104,13 +104,13 @@ def edit_review(venue_id, review_id):
 
     # Review's writer
     review_writer = db.session.execute(
-        'select appuser_id from review where id = :review_id',
+        'select appuser_id from scoop.review where id = :review_id',
         {'review_id': review_id}
     ).fetchone().appuser_id
 
     if review and rating and session.get('appuser_id') == review_writer:
         db.session.execute(
-            'update review set review = :review, stars = :stars, modified_at = now() '
+            'update scoop.review set review = :review, stars = :stars, modified_at = now() '
             + 'where id = :review_id',
             {
                 'review': review,
@@ -128,13 +128,13 @@ def edit_review(venue_id, review_id):
 def delete_review(venue_id, review_id):
     # Current user
     review_writer = db.session.execute(
-        'select appuser_id from review where id = :review_id',
+        'select appuser_id from scoop.review where id = :review_id',
         {'review_id': review_id}
     ).fetchone().appuser_id
 
     if session["appuser_id"] and session["appuser_id"] == review_writer:
         db.session.execute(
-            'update review set deleted = true '
+            'update scoop.review set deleted = true '
             + 'where id = :review_id',
             {'review_id': review_id}
         )

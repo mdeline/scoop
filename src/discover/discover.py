@@ -53,7 +53,7 @@ def discover_query():
     sql_results = '''
         select 
             venue.* 
-        from venue
+        from scoop.venue
         inner join neighbourhood nh on nh.id = venue.neighbourhood_id
         where lower(venue.name) like :query_cleaned
         or lower(street_address) like :query_cleaned
@@ -63,8 +63,8 @@ def discover_query():
     '''
 
     sql_aggregates = '''
-        select count(*) as count from venue
-        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        select count(*) as count from scoop.venue
+        inner join scoop.neighbourhood nh on nh.id = venue.neighbourhood_id
         where lower(venue.name) like :query_cleaned
         or lower(street_address) like :query_cleaned
         or postal_code like :query_cleaned
@@ -97,8 +97,8 @@ def discover_neighbourhood():
         select
             venue.*,
             nh.name as neighbourhood
-        from venue
-        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        from scoop.venue
+        inner join scoop.neighbourhood nh on nh.id = venue.neighbourhood_id
         where nh.name = :query
         ''',
         {"query":query}
@@ -107,8 +107,8 @@ def discover_neighbourhood():
     venue_aggregates = db.session.execute('''
         select
             count(*) as count
-        from venue
-        inner join neighbourhood nh on nh.id = venue.neighbourhood_id
+        from scoop.venue
+        inner join scoop.neighbourhood nh on nh.id = venue.neighbourhood_id
         where nh.name = :query
         ''',
         {"query":query}
