@@ -126,13 +126,13 @@ def edit_review(venue_id, review_id):
 
 @venue_bp.route("/<venue_id>/review/<review_id>/delete", methods=["GET"])
 def delete_review(venue_id, review_id):
-    # Current user
-    review_writer = db.session.execute(
+    # Get review writer's user id
+    writer_id = db.session.execute(
         "select appuser_id from scoop.review where id = :review_id",
         {"review_id": review_id}
     ).fetchone().appuser_id
 
-    if session["appuser_id"] and session["appuser_id"] == review_writer:
+    if session["appuser_id"] and session["appuser_id"] == writer_id:
         db.session.execute(
             "update scoop.review set deleted = true "
             + "where id = :review_id",

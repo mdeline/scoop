@@ -1,0 +1,18 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<link
+  rel="stylesheet"
+  href="/auth/static/auth.css"
+  type="text/css"
+/>
+
+<div class="auth-container">
+    {% if session.logged_in %}
+        <h2>Successfully logged in as {{ session.appuser_fullname }}.</h2>
+    {% else %}
+        <h2>Registration complete. You can now <a href="{{ url_for('auth_bp.login') }}">login.</a></h2>
+    {% endif %}
+</div>
+
+{% endblock %}

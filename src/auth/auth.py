@@ -58,7 +58,10 @@ def login():
 
 @auth_bp.route('/success', methods=['GET', 'POST'])
 def success():
-    return redirect(url_for("home_bp.home"))
+    return render_template(
+        "success.jinja2",
+        template="success-template"
+    )
 
 @auth_bp.route("/logout")
 def logout():
