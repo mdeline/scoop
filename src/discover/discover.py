@@ -41,7 +41,7 @@ def discover_all():
     neighbourhoods = db.session.execute(sql).fetchall()
 
     return render_template(
-        'discover.jinja2',
+        'discover.html',
         neighbourhoods=neighbourhoods
     )
 
@@ -83,7 +83,7 @@ def discover_query():
     ).fetchone()
 
     return render_template(
-        "discover_results.jinja2", 
+        "discover_results.html", 
         venues=venues,
         query=query,
         venue_aggregates=venue_aggregates
@@ -115,7 +115,7 @@ def discover_neighbourhood():
     ).fetchone()
 
     return render_template(
-        "discover_results.jinja2", 
+        "discover_results.html", 
         venues=venues,
         venue_aggregates=venue_aggregates,
         query=query

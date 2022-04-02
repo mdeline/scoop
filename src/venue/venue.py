@@ -52,7 +52,7 @@ def venue(venue_id):
 
     if venue:
         return render_template(
-            "venue.jinja2",
+            "venue.html",
             venue=venue,
             review_aggregates=review_aggregates,
             reviews=reviews
@@ -92,7 +92,7 @@ def get_review(venue_id, review_id):
 
     if review and session.get("appuser_id") == review.appuser_id:
         return render_template(
-            "edit_review.jinja2",
+            "edit_review.html",
             review=review
         )
     return redirect(url_for("home_bp.error")) 

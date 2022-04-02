@@ -25,7 +25,7 @@ def register():
             return redirect(url_for("auth_bp.success"))
         failed_registration = 'Email already exists.'
     return render_template(
-        "register.jinja2",
+        "register.html",
         form=form,
         title="Register",
         template="register-template",
@@ -49,7 +49,7 @@ def login():
                 return redirect(url_for("auth_bp.success"))
         failed_login = 'Invalid email or password.'
     return render_template(
-        'login.jinja2',
+        'login.html',
         form=form,
         title='Login.',
         template='login-template',
@@ -59,7 +59,7 @@ def login():
 @auth_bp.route('/success', methods=['GET', 'POST'])
 def success():
     return render_template(
-        "success.jinja2",
+        "success.html",
         template="success-template"
     )
 

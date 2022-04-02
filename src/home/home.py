@@ -10,13 +10,13 @@ home_bp = Blueprint(
 @home_bp.route("/", methods=["GET"])
 def home():
     return render_template(
-        "home.jinja2",
+        "home.html",
         template = "home-template"
     )
 
 @home_bp.route("/error", methods=["GET"])
 def error():
     return render_template(
-        "error.jinja2",
+        "error.html",
         template = "error-template"
     )
