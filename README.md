@@ -8,12 +8,12 @@ Scoop lists information about restaurants and cafes located in Helsinki, Espoo a
 - List venues by neighbourhood
 - Add, modify and delete ratings and reviews after registration
 
-## Features have not yet been implemented
+## Features that have not yet been implemented
 - Users can list their own reviews
 - Users can add and change their profile image
 - Users can change their password
 
 ## Local development
-source venv/bin/activate
-pip install -r requirements.txt
-flask run
+    source venv/bin/activate
+    pip install -r requirements.txt
+    flask run
